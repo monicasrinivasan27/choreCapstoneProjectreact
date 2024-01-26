@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import React from 'react';
+import AddChores from './AddChores';
+import UpdateChore from './UpdateChore';
+import ChoresList from './ChoresList';
+// import AssignedChores from './AssignedChores';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/api/chores/add" element={<AddChores />} />
+      <Route path="/api/chores/list" element={<ChoresList />} />
+      {/* <Route path="/api/assignments/assigned-chores" element={<AssignedChores />} /> */}
+      <Route path="/api/chores/edit/:choreId" element={<UpdateChore />} />
+     </Routes>
+
   );
 }
-
 export default App;
