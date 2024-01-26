@@ -68,6 +68,7 @@ const RewardManagement = () => {
             <th>Description</th>
             <th>Points</th>
             <th>Action</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
