@@ -12,16 +12,14 @@ const ChoresList = () => {
   // useEffect hook to fetch the list of chores from the server when the component mounts
   useEffect(() => {
     const fetchChores = async () => {
-      try {
+      
         // Fetch the list of chores from the server
         const response = await fetch('http://localhost:8080/api/chores/list');
         const data = await response.json();
 
         // Update the state with the fetched chore data
         setChores(data);
-      } catch (error) {
-        console.error('Error fetching chores:', error.message);
-      }
+     
     };
 
     // Call the fetchChores function
@@ -30,7 +28,7 @@ const ChoresList = () => {
 
   // Function to handle chore deletion
   const handleDelete = async (choreId) => {
-    try {
+    
       // Send a DELETE request to the server to delete the selected chore
       const response = await fetch(`http://localhost:8080/api/chores/${choreId}`, {
         method: 'DELETE',
@@ -44,9 +42,7 @@ const ChoresList = () => {
       } else {
         console.error('Failed to delete chore');
       }
-    } catch (error) {
-      console.error('Error deleting chore:', error.message);
-    }
+    
   };
 
   
