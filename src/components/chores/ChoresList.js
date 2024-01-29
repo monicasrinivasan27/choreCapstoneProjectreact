@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './ChoreStyles.css';
+import '../../styles/ChoreStyles.css';
 //import { useNavigate } from 'react-router-dom';
 //import AssignChore from './AssignChore';
 

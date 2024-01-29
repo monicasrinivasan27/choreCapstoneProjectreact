@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import React from 'react';
-import AddChores from './AddChores';
-import UpdateChore from './UpdateChore';
-import ChoresList from './ChoresList';
+import AddChores from './components/chores/AddChores';
+import UpdateChore from './components/chores/UpdateChore';
+import ChoresList from './components/chores/ChoresList';
 // import AssignedChores from './AssignedChores';
 
 
