@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import './ChoreStyles.css';
+import '../../styles/ChoreStyles.css';
 import { useNavigate } from 'react-router-dom';
 
 

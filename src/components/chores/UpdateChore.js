@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import './ChoreStyles.css';
+import '../../styles/ChoreStyles.css';
 
 // Functional component to edit a chore
 const UpdateChore = () => {
