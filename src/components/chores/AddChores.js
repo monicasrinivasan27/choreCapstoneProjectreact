@@ -81,7 +81,7 @@ const AddChore = () => {
     <div>
       <h1>Create a new Chore</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form class='group' onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
           <input
@@ -90,7 +90,9 @@ const AddChore = () => {
             type="text"
             value={chore.name}
             onChange={handleChange}
+
           />
+
         </div>
         <div>
           <label htmlFor="description">Description:</label>
