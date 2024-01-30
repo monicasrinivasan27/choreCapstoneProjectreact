@@ -4,8 +4,10 @@ import React from 'react';
 import AddChores from './components/chores/AddChores';
 import UpdateChore from './components/chores/UpdateChore';
 import ChoresList from './components/chores/ChoresList';
-// import AssignedChores from './AssignedChores';
+import RewardManagement from './components/RewardManagement';
+import AddReward from './components/AddReward';
 
+// import AssignedChores from './AssignedChores';
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
       <Route path="/api/chores/list" element={<ChoresList />} />
       {/* <Route path="/api/assignments/assigned-chores" element={<AssignedChores />} /> */}
       <Route path="/api/chores/edit/:choreId" element={<UpdateChore />} />
-     </Routes>
+      <Route path="/allrewards" element={<RewardManagement />} />
+      <Route path="/addRewards" element={<AddReward />} />
+           </Routes>
 
   );
 }
