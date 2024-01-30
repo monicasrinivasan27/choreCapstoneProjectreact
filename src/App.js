@@ -1,38 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import RewardManagement from './components/RewardManagement';
-import HeaderComponent from './components/HeaderComponent';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider} from "react-router-dom";
-import AddReward from './components/AddReward';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import React from 'react';
+import AddChores from './components/chores/AddChores';
+import UpdateChore from './components/chores/UpdateChore';
+import ChoresList from './components/chores/ChoresList';
+// import AssignedChores from './AssignedChores';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <></>,
-  },
-  {
-    path: "/allrewards",
-    element: <>
-    <HeaderComponent />
-    <RewardManagement />
-    </>
-  },
-  {
-    path: "/addRewards",
-    element: <>
-    <AddReward />
-    </>
-  }
-]);
+function App() {
+  return (
+    <Routes>
+      <Route path="/api/chores/add" element={<AddChores />} />
+      <Route path="/api/chores/list" element={<ChoresList />} />
+      {/* <Route path="/api/assignments/assigned-chores" element={<AssignedChores />} /> */}
+      <Route path="/api/chores/edit/:choreId" element={<UpdateChore />} />
+      <Route path="/allrewards" element={<RewardManagement />} />
+      <Route path="/addRewards" element={<AddReward />} />
+     </Routes>
 
-  const App = () => {
-    return (
-      <RouterProvider router={router} />
-    );
-  };
-
-
+  );
+}
 export default App;
