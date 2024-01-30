@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../../styles/ChoreStyles.css';
 
 const AssignedChoresPage = () => {
   const [assignedChores, setAssignedChores] = useState([]);

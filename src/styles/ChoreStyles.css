@@ -83,7 +83,7 @@ th,
 td {
   padding: 10px;
   text-align: left;
-  border: 1px solid green;
+  border: 1px solid #3D5656;
 }
 
 th {
@@ -106,7 +106,7 @@ tr {
 form.group {
   margin: auto;
   width: 75%;
-  border: 3px solid green;
+  border: 3px solid #3D5656;
   padding: 10px;
 }
 
