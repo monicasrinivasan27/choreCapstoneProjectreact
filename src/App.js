@@ -4,6 +4,9 @@ import React from 'react';
 import AddChores from './components/chores/AddChores';
 import UpdateChore from './components/chores/UpdateChore';
 import ChoresList from './components/chores/ChoresList';
+import RewardManagement from './components/rewards/RewardManagement';
+import AddReward from './components/rewards/AddReward';
+
 // import AssignedChores from './AssignedChores';
 
 function App() {
