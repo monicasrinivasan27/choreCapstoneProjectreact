@@ -25,7 +25,7 @@ const AssignedChoresPage = () => {
   return (
     <div>
       <h1>Assigned Chores</h1>
-       (
+      {Array.isArray(assignedChores) && assignedChores.map(item => (
         <div key={item.kid.kidId}>
           <h2>{item.kid.name}'s Chores</h2>
           <table>
