@@ -4,8 +4,9 @@ import React from 'react';
 import AddChores from './components/chores/AddChores';
 import UpdateChore from './components/chores/UpdateChore';
 import ChoresList from './components/chores/ChoresList';
-import RewardManagement from './components/RewardManagement';
-import AddReward from './components/AddReward';
+import RewardManagement from './components/rewards/RewardManagement';
+import AddReward from './components/rewards/AddReward';
+import EditReward from './components/rewards/EditReward';
 
 // import AssignedChores from './AssignedChores';
 
@@ -18,6 +19,7 @@ function App() {
       <Route path="/api/chores/edit/:choreId" element={<UpdateChore />} />
       <Route path="/allrewards" element={<RewardManagement />} />
       <Route path="/addRewards" element={<AddReward />} />
+      <Route path="/editRewards/:rewardId" element={<EditReward />} />
            </Routes>
 
   );
