@@ -15,7 +15,7 @@ const RewardManagement = () => {
     fetchData();
   },[]);
 
-  const fetchData = async () => {
+ const fetchData = async () => {
     try {
      // console.log("calling set rewards")
       await axios.get('http://localhost:8080/api/rewards/list')
@@ -36,12 +36,17 @@ const RewardManagement = () => {
   const navigateToAddRewards = () => {
     navigate('/addRewards');
   };
+
+  const navigateToEditRewards = (rewardId) => {
+    navigate(`/editRewards/${rewardId}`);
+  };
+  
  
   
 
-  const handleDelete = (id) =>{
-    console.log("calling hanfle delete : ",id)
-    axios.delete("http://localhost:8080/api/rewards/"+id).then((response)=>{
+  const handleDelete = (rewardId) =>{
+    console.log("calling hanfle delete : ",rewardId)
+    axios.delete("http://localhost:8080/api/rewards/"+rewardId).then((response)=>{
       console.log("delete response : ",response)
       fetchData();
     }).catch((error)=>{
@@ -63,7 +68,7 @@ const RewardManagement = () => {
       <table className='table table-striped table-bordered'>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Id</th>
             <th>Name</th>
             <th>Description</th>
             <th>Points</th>
@@ -75,14 +80,13 @@ const RewardManagement = () => {
             <>
               {rewards.map(reward => (
                 <tr>
-                <td> {reward.id}</td>
+                <td> {reward.rewardId}</td>
                   <td> {reward.name}</td>
                   <td>{reward.description}</td>
                   <td>{reward.points}</td>
                   <td>
-                  {/* <button onClick={() => navigateToEditRewards(reward.id)}>Edit</button> */}
-                  <button>Edit</button>
-                  <button onClick= {()=>{handleDelete(reward.id)}}>Delete</button>
+                  <button className='btn btn-warning mr-2'onClick={() => navigateToEditRewards(reward.rewardId)}>Edit</button>
+                  <button className='btn btn-danger'onClick= {()=>{handleDelete(reward.rewardId)}}>Delete</button>
                   </td>
                 </tr>
               ))}
