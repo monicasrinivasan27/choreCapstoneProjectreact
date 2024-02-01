@@ -1,9 +1,11 @@
 import * as React from 'react';
 
-export default function Register() {
+export default function ParentRegister() {
+
     return (
         <div>
-            <h1>Registration Form Here</h1>
+            
         </div>
     )
+
 }

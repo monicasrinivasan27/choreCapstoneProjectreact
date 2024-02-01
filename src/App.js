@@ -1,20 +1,26 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import React from 'react';
+import axios from 'axios';
 import AddChores from './components/chores/AddChores';
 import UpdateChore from './components/chores/UpdateChore';
 import ChoresList from './components/chores/ChoresList';
 // import AssignedChores from './AssignedChores';
 import LandingPage from './components/LandingPage';
-import Register from './components/Register';
 import ParentLogin from './components/Parent-Login';
 import ChildLogin from './components/Child-Login';
+
+import Header from './components/Header';
+import AppContent from './components/AppContent';
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path='/register' element={<Register />} />
+      
+      <Route path="/" element={<AppContent />} />
+
+
+      <Route path="/..." element={<LandingPage />} />
       <Route path='/parent-login' element={<ParentLogin />} />
       <Route path='/child-login' element={<ChildLogin />} />
 
@@ -22,7 +28,7 @@ function App() {
       <Route path="/api/chores/list" element={<ChoresList />} />
       {/* <Route path="/api/assignments/assigned-chores" element={<AssignedChores />} /> */}
       <Route path="/api/chores/edit/:choreId" element={<UpdateChore />} />
-     </Routes>
+    </Routes>
 
   );
 }
