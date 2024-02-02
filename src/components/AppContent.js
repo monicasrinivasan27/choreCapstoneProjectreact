@@ -23,9 +23,10 @@ export default class AppContent extends React.Component {
     }
 
     onLogin = (e, username, password) => {
+        debugger;
         e.preventDefault();
         request("POST",
-        "/login",
+        "/api/parent-login",
         { login: username, password: password}
         ) .then((response) => {
             this.setState({componentToShow: "messages"})
