@@ -10,7 +10,7 @@ export default class AppContent extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
-            componentToShow: "welcome"
+            componentToShow: "landingPage"
         };
     }
 
@@ -27,13 +27,14 @@ export default class AppContent extends React.Component {
         e.preventDefault();
         request("POST",
         "/api/parent-login",
-        { login: username, password: password}
+        { username: username, password: password}
         ) .then((response) => {
-            this.setState({componentToShow: "messages"})
+            this.setState({componentToShow: "parent-dash"})
         }).catch((error) => {
-            this.setState({componentToShow: "welcome"})
+            this.setState({componentToShow: "landingPage"})
         })
     }
+    //Check response status code to see what happens with wrong password and what page it goes to
 
     onRegister = (e, firstName, lastName, username, password) => {
         e.preventDefault();
@@ -42,7 +43,7 @@ export default class AppContent extends React.Component {
         { 
             firstName: firstName,
             lastName: lastName,
-            login: username,
+            username: username,
             password: password
         }
         ) .then((response) => {

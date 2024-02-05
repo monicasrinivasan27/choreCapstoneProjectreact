@@ -3,13 +3,13 @@
 }
 
 img {
-    max: width 30%; 
+    max-width: 50%; 
     height:auto
 }
 
 .landingPage-image {
     display: block;
-    margin-top: 5%;
+    margin-top: 7%;
     margin-left: auto;
     margin-right: auto;
     width: max-content;
@@ -17,6 +17,7 @@ img {
 
 .landingPage-btn {
     background-color: #3D5656 !important;
+    color: #FED049 !important;
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 25px;
@@ -24,4 +25,5 @@ img {
 
 .landingPage-btn:hover {
     background-color: #68B984 !important;
+    color: white !important;
 }

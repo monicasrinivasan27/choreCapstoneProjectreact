@@ -9,7 +9,7 @@ export default class LoginForm extends React.Component {
             active: "login",
             firstName: "",
             lastName: "",
-            login: "",
+            username: "",
             password: "",
             onLogin: props.onLogin,
             onRegister: props.onRegister
@@ -23,7 +23,7 @@ export default class LoginForm extends React.Component {
     }
 
     onSubmitLogin = (e) => {
-        this.state.onLogin(e, this.state.login, this.state.password)
+        this.state.onLogin(e, this.state.username, this.state.password)
     }
 
     onSubmitRegister = (e) => {
@@ -31,7 +31,7 @@ export default class LoginForm extends React.Component {
             e,
             this.state.firstName,
             this.state.lastName,
-            this.state.login,
+            this.state.username,
             this.state.password
         )
     }
