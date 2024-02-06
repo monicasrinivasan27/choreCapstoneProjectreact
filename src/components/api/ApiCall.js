@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/ApiStyles.css';
 //import axios from 'axios';
-const dueDate = '2024-01-06';
+const dueDate = '2024-07-04';
 
 const fetchApi = async () => {
 
@@ -53,8 +53,8 @@ const ApiCall = () => {
           },
           body: JSON.stringify(holidayData),
         });
-        const responseData = await response.json();
-        console.log('Response from Spring Boot:', responseData);
+        //   const responseData = await response.json();
+        //  console.log('Response from Spring Boot:', responseData);
       } catch (error) {
         console.error('Error making the request:', error);
       }
