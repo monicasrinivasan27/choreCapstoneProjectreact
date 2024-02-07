@@ -2,48 +2,46 @@ import * as React from 'react';
 import '../styles/login.css';
 import classNames from 'classnames';
 import { request, setAuthToken } from '../axios_helper';
+import { useNavigate } from 'react-router-dom';
 
-export default class parentLogin extends React.Component {
+
+
+export default class ParentLogin extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             active: "parentLogin",
             username: "",
             password: "",
             onParentLogin: props.onParentLogin,
-        }
+        };
     }
 
-    /* This method: store in the state the updated values of the fields */
     onChangeHandler = (event) => {
         let name = event.target.name;
         let value = event.target.value;
         this.setState({ [name]: value });
     }
 
-    onParentLogin = (e, username, password) => {
+    onSubmitParentLogin = async (e) => {
         e.preventDefault();
-        request("POST",
-            "/api/parent-dash",
-            {
-                username: username,
-                password: password
-            }
-        ).then((response) => {
-            this.setState({ componentToShow: "parentDash" })
-            setAuthToken(response.data.token)
-        }).catch((error) => {
-            this.setState({ componentToShow: "parentLogin" })
-        })
+
+
+        try {
+            const response = await request("POST", "/api/parentLogin", {
+                username: this.state.username,
+                password: this.state.password
+            });
+
+            this.setState({ componentToShow: "parentDash" });
+            setAuthToken(response.data.token);
+
+        } catch (error) {
+            console.error("Login failed:", error);
+            this.setState({ componentToShow: "parentLogin" });
+        }
     }
 
-    onSumbitParentLogin = (e) => {
-        this.state.onParentLogin(
-            e,
-            this.state.username,
-            this.state.password
-        )
-    }
 
     render() {
         return (
@@ -54,7 +52,7 @@ export default class parentLogin extends React.Component {
                     </a>
                 </header>
                 <div className={classNames("tab-pane", "fade", this.state.active === 'parentLogin' ? 'show active' : '')} id='pills-register'>
-                    <form className='login-form' onSubmit={this.onSumbitParentLogin}>
+                    <form className='login-form' onSubmit={this.onSubmitParentLogin}>
                         <div className=''>
                             <div className='jumbotron jumbotron'>
                                 <div className='container'>

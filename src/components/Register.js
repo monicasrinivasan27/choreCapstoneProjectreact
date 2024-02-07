@@ -47,8 +47,9 @@ export default class Register extends React.Component {
         })
     }
 
-    onSumbitRegister = (e) => {
-        this.state.onRegister(
+    onSubmitRegister = (e) => {
+        e.preventDefault();
+        this.onRegister(
             e,
             this.state.firstName,
             this.state.lastName,
@@ -56,7 +57,7 @@ export default class Register extends React.Component {
             this.state.username,
             this.state.password,
             this.state.verifyPassword
-        )
+        );
     }
 
     render() {
