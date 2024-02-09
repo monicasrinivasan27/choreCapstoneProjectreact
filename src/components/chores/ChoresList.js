@@ -1,51 +1,70 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/ChoreStyles.css';
-//import { useNavigate } from 'react-router-dom';
-//import AssignChore from './AssignChore';
+import { useNavigate } from 'react-router-dom';
+import AssignChore from './AssignChore';
 
-// Functional component to display a list of chores
+// ChoresList component
 const ChoresList = () => {
-  // State to hold the list of chores
+  // Initialize the useNavigate hook for navigation
+  const navigate = useNavigate();
+
+  // State to store the list of chores
   const [chores, setChores] = useState([]);
 
-  // useEffect hook to fetch the list of chores from the server when the component mounts
+  // Function to handle chore assignment
+  const handleAssignChore = async (choreId, selectedKid, dueDate, selectedValueType, selectedValue) => {
+    // Format the due date to a string
+    const formattedDueDate = dueDate.toISOString().split('T')[0];
+
+    // Send a POST request to assign the chore
+    const response = await fetch(`http://localhost:8080/api/assignments/${choreId}/${selectedKid}?dueDate=${formattedDueDate}&valueType=${selectedValueType}&value=${selectedValue}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // Check if the request was successful and navigate accordingly
+    if (response.ok) {
+      console.log('Chore assigned successfully');
+      navigate('/api/assignments/assigned-chores');
+    } else {
+      console.error('Failed to assign chore');
+    }
+  };
+
+  // Effect hook to fetch chores when the component mounts
   useEffect(() => {
     const fetchChores = async () => {
-      
-        // Fetch the list of chores from the server
-        const response = await fetch('http://localhost:8080/api/chores/list');
-        const data = await response.json();
-
-        // Update the state with the fetched chore data
-        setChores(data);
-     
+      // Fetch the list of chores from the API
+      const response = await fetch('http://localhost:8080/api/chores/list');
+      const data = await response.json();
+      // Update the state with the fetched data
+      setChores(data);
     };
 
     // Call the fetchChores function
     fetchChores();
-  }, []); // Empty dependency array ensures the effect runs only once on mount
+  }, []);
 
   // Function to handle chore deletion
   const handleDelete = async (choreId) => {
-    
-      // Send a DELETE request to the server to delete the selected chore
-      const response = await fetch(`http://localhost:8080/api/chores/${choreId}`, {
-        method: 'DELETE',
-      });
+    // Send a DELETE request to delete the chore
+    const response = await fetch(`http://localhost:8080/api/chores/${choreId}`, {
+      method: 'DELETE',
+    });
 
-      // Check if the deletion was successful
-      if (response.ok) {
-        console.log('Chore deleted successfully');
-        // Reload the page to reflect the updated chore list
-        window.location.reload();
-      } else {
-        console.error('Failed to delete chore');
-      }
-    
+    // Check if the request was successful and reload the page
+    if (response.ok) {
+      console.log('Chore deleted successfully');
+      window.location.reload();
+    } else {
+      console.error('Failed to delete chore');
+    }
   };
 
-  
+
   return (
     <div>
       <div>
@@ -53,14 +72,14 @@ const ChoresList = () => {
 
         {/* Display the list of chores */}
         <ul className="chore-container">
-          {chores && chores.map((chore) => (
+          {chores && chores.map && chores.map((chore) => (
             <div className="chore-item" key={chore.choreId}>
               <div className="chore-details">
                 <strong>Name:</strong> {chore.name}<br />
                 <strong>Description:</strong> {chore.description}<br />
 
+                {/* Display chore image if available */}
                 <div>
-                  {/* Display the chore image if available */}
                   {chore.image && (
                     <div>
                       <img src={`${chore.image}`} alt={chore.name} /> <br />
@@ -69,25 +88,27 @@ const ChoresList = () => {
                 </div>
               </div>
 
+              {/* Container for buttons: Edit, Delete, Assign */}
               <div className="button-container">
-                {/* Link to edit chore page */}
+                {/* Link to edit chore */}
                 <Link to={`/api/chores/edit/${chore.choreId}`} className="button">
                   Edit
                 </Link>
 
-                {/* Button to delete the chore */}
+                {/* Button to delete chore */}
                 <button className="button" onClick={() => handleDelete(chore.choreId)}>
                   Delete
                 </button>
 
-              {/* < AssignChore choreId={chore.choreId} handleAssignChore={handleAssignChore} /> */}
+                {/* Component for assigning chore */}
+                <AssignChore choreId={chore.choreId} handleAssignChore={handleAssignChore} />
               </div>
             </div>
           ))}
         </ul>
       </div>
 
-      {/* Link to navigate to the chore creation page */}
+      {/* Link to add a new chore */}
       <p>
         <Link to="/api/chores/add" className="button">
           Create
@@ -97,5 +118,5 @@ const ChoresList = () => {
   );
 };
 
-// Export the component for use in other parts of the application
+// Export the ChoresList component
 export default ChoresList;

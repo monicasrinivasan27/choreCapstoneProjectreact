@@ -2,6 +2,17 @@ html {
   background-color: #ecf8f9;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ecf8f9;
+  margin: 10px;
+  /* padding: 0;
+  display: flex; */
+  /* justify-content: center;
+  align-items: center; */
+  /* height: 100vh; */
+}
+
 .chore-container {
   display: flex;
   flex-wrap: wrap;
@@ -14,13 +25,17 @@ html {
 }
 
 .chore-item {
-  align-items: center;
-  width: 175px;
-  box-sizing: border-box;
-  border: hidden;
-  padding: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
   text-align: center;
 }
+
+
 
 img {
   width: 120px;
@@ -31,7 +46,7 @@ img {
 
 .button-container {
   display: block;
-  align-items: flex-end;
+  /* align-items: flex-end; */
   gap: 4px;
 
 }
@@ -39,27 +54,6 @@ img {
 a {
   text-decoration: none;
 }
-
-form {
-  margin: auto;
-  width: 75%;
-  border: 3px solid green;
-  padding: 10px;
-}
-
-label {
-  display: block;
-   width: 150px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-input[type="text"]{
-  width: 30%;
-  height: 20px;
-}
-
-
 
 .button,
 button[type="submit"] {
@@ -74,5 +68,71 @@ button[type="submit"] {
   border-radius: 10px;
   width: 60px;
   font-size: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid #fff;
+  background-color: #68B984;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #3D5656;
+}
+
+th {
+  background-color: #fff;
+}
+
+tr {
+  background-color: #fff;
+}
+
+
+.date-kid {
+  display: block;
+  align-items: center;
+  gap: 4px;
+  font-size: small;
+
+}
+
+form.group {
+  margin: auto;
+  width: 75%;
+  border: 3px solid #3D5656;
+  padding: 10px;
+}
+
+label {
+  display: block;
+  width: 150px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  width: 30%;
+  height: 20px;
+}
+
+input[type="number"] {
+  width: 20%;
+  height: 15px;
+  /* margin-bottom: 10px;  */
+
+}
+
+.flex-container{
+  display: flex;
+  gap: 70px;
+margin: 20px;
+  
 }
 
