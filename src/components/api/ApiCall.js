@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/ApiStyles.css';
-//import axios from 'axios';
-const dueDate = '2024-07-04';
+const dueDate = '2024-05-27';
 
 const fetchApi = async () => {
 
@@ -21,7 +20,6 @@ const fetchApi = async () => {
   }
 };
 const ApiCall = () => {
-  //  const [data, setData] = useState(Boolean);
   const [isLoading, setIsLoading] = useState(true);
   const [box, setBox] = useState(false);
   useEffect(() => {
@@ -29,7 +27,6 @@ const ApiCall = () => {
       try {
         const result = await fetchApi();
         if (result) {
-          console.log("Inside");
           publicHolidayIns();
           setBox(true);
         }
@@ -43,9 +40,8 @@ const ApiCall = () => {
     const publicHolidayIns = async () => {
       try {
         const holidayData = {
-          holidayDate: dueDate.toString(), // Add other properties as needed
+          holidayDate: dueDate.toString(),
         };
-        // console.log("holidayData"+JSON.stringify(holidayData));
         const response = await fetch('http://localhost:8080/holiday-insert', {
           method: 'POST',
           headers: {
@@ -53,13 +49,12 @@ const ApiCall = () => {
           },
           body: JSON.stringify(holidayData),
         });
-        //   const responseData = await response.json();
-        //  console.log('Response from Spring Boot:', responseData);
+          // const responseData = await response.json();
+          //console.log('Response from Spring Boot:', responseData);
       } catch (error) {
         console.error('Error making the request:', error);
       }
     };
-
 
 
     fetchData();
