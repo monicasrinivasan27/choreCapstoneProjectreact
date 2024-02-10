@@ -14,6 +14,7 @@
 .register-btn {
     background-color: #3D5656 !important;
     color: #FED049 !important;
+    border: none !important;
 }
 
 .register-btn:hover {

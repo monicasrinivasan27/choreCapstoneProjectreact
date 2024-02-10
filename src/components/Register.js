@@ -107,10 +107,8 @@ export default class Register extends React.Component {
                             <input type='password' id='verifyPassword' name='verifyPassword' className='form-control' onChange={this.onChangeHandler} />
                             <label className='form-label' htmlFor='verifyPassword'>Verify Password</label>
                         </div>
-                        <div>
-                            <a href='./parentLogin' className='row justify-content-center'>
-                                <button className='btn btn-primary register-btn' type='submit'>Sign In</button>
-                            </a>
+                        <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
+                            <button type="button" class="btn btn-primary register-btn">Create Account</button>
                         </div>
                     </form>
                 </div>
@@ -118,3 +116,8 @@ export default class Register extends React.Component {
         )
     }
 }
+
+
+{/* <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
+    <a class="btn btn-primary register-btn" href="ParentLogin" type="submit" role="submit" >Create Account</a>
+</div> */}

@@ -1,8 +1,5 @@
 import * as React from 'react';
 import '../styles/LandingPage.css'
-import Buttons from './Buttons';
-import ParentLogin from './parentLogin';
-import classNames from 'classnames';
 
 export default class LandingPage extends React.Component {
     constructor(props) {
