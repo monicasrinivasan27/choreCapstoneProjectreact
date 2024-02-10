@@ -1,11 +1,16 @@
 import * as React from 'react';
 import '../styles/Register.css';
-import parentLogin from './parentLogin';
 import classNames from 'classnames';
 import { request, setAuthToken } from '../axios_helper';
-import AuthContent from './AuthContent';
+import { withRouter } from 'react-router-dom';
+
+import ParentLogin from './parentLogin';
 
 export default class Register extends React.Component {
+    navigate = () => {
+        this.props.history.push('/parentLogin');
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -108,7 +113,9 @@ export default class Register extends React.Component {
                             <label className='form-label' htmlFor='verifyPassword'>Verify Password</label>
                         </div>
                         <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
-                            <button type="button" class="btn btn-primary register-btn">Create Account</button>
+                            <React.Fragment>
+                                <button onClick={this.navigate} class="btn btn-primary register-btn">Create Account</button>
+                            </React.Fragment> 
                         </div>
                     </form>
                 </div>
@@ -121,3 +128,11 @@ export default class Register extends React.Component {
 {/* <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
     <a class="btn btn-primary register-btn" href="ParentLogin" type="submit" role="submit" >Create Account</a>
 </div> */}
+
+{/* <button type="button" class="btn btn-primary register-btn">Create Account</button> */}
+
+{/* <a href='/parentLogin' className='row justify-content-center link-offset-2 link-underline link-underline-opacity-0'>
+    {/* <button className='btn btn-primary register-btn' type='submit'>Sign In</button> */}
+//     <button type="submit button" class="btn btn-primary register-btn">Create Account</button>
+    
+// </a> */}
