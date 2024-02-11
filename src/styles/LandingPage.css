@@ -1,0 +1,29 @@
+.landingPage-body {
+    background-color: #ECF8F9;
+}
+
+img {
+    max-width: 50%; 
+    height:auto
+}
+
+.landingPage-image {
+    display: block;
+    margin-top: 7%;
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+}
+
+.landingPage-btn {
+    background-color: #3D5656 !important;
+    color: #FED049 !important;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 25px;
+}
+
+.landingPage-btn:hover {
+    background-color: #68B984 !important;
+    color: white !important;
+}
