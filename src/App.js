@@ -8,7 +8,8 @@ import ChoresList from './components/chores/ChoresList';
 // import AssignedChores from './AssignedChores';
 import LandingPage from './components/LandingPage';
 import Register from './components/Register';
-import ParentLogin from './components/parentLogin';
+import ParentLogin from './components/ParentLogin';
+import ParentDashboard from './components/ParentDashboard';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path='/' element={<LandingPage />} />
       <Route path='/api/register' element={<Register />} />
       <Route path='/api/parentLogin' element={<ParentLogin />} />
+      <Route path='/api/parentDash' element={<ParentDashboard />} />
       
       <Route path="/api/chores/add" element={<AddChores />} />
       <Route path="/api/chores/list" element={<ChoresList />} />

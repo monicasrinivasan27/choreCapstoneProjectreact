@@ -1,10 +1,11 @@
-import * as React from 'react';
+import React from 'react';
+import Navbar from './Navbar'
 
-export default class parentDash extends React.Component {
-
-    render() {
+const ParentDashboard = () => {
+    
         return (
-            <div className='row justify-content-md-center'>
+            <div className='body'>
+                <Navbar />
                 <div className='jumbotron jumbotron'>
                     <div className='container'>
                         <h1 className='display-4'>Welcome</h1>
@@ -14,5 +15,4 @@ export default class parentDash extends React.Component {
             </div>
         )
     }
-
-}
+ export default ParentDashboard;
