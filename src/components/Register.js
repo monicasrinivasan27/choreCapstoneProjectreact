@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { request, setAuthToken } from '../axios_helper';
+import { Button } from 'bootstrap';
 import '../styles/Register.css';
 
 const Register = () => {
@@ -62,9 +63,9 @@ const Register = () => {
             <div className='tab-pane fade show active' id='pills-register'>
                 <form className='register-form' onSubmit={onRegister}>
                     <div className=''>
-                        <div className='jumbotron jumbotron'>
+                        <div>
                             <div className='container'>
-                                <h1 className='row justify-content-center display-4 welcome-message'>Welcome</h1>
+                                <h1 className='row justify-content-center display-4'>Welcome</h1>
                                 <p className='row justify-content-center lead message'>Create an account with us!</p>
                             </div>
                         </div>

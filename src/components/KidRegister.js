@@ -56,7 +56,7 @@ const KidRegister= () => {
             <div className='tab-pane fade show active' id='pills-register'>
                 <form className='register-form' onSubmit={onKidRegister}>
                     <div className=''>
-                        <div className='jumbotron jumbotron'>
+                        <div>
                             <div className='container'>
                                 <h1 className='row justify-content-center display-4 welcome-message'>Child Registration</h1>
                                 <p className='row justify-content-center lead message'>Please fill out the form below to create an account for your child</p>
@@ -84,7 +84,7 @@ const KidRegister= () => {
                     </div>
                     <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
                         {/* <button className='btn btn-primary register-btn' type='submit'>Create Account</button> */}
-                        <a class="btn btn-primary register-btn" href="ParentDash" type="submit" role="submit" >Create Account</a>
+                        <a class="btn btn-primary register-btn" href="Parent-dashboard" type="submit" role="submit" >Create Account</a>
                     </div>
                 </form>
             </div>
