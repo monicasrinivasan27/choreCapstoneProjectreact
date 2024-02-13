@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 import '../../styles/ChoreStyles.css';
 import { useNavigate } from 'react-router-dom';
-import { request } from '../../axios_helper'; 
-
-
+import { request,getAuthToken } from '../../axios_helper'; 
+import getUserIdFromAuthToken from '../../axios_helper';
+import Navbar from '../Navbar';
 // Functional component for adding a new chore
 const AddChore = () => {
   // Hook to manage navigation between pages
   const navigate = useNavigate();
+  const id = getUserIdFromAuthToken(getAuthToken());
 
   // State to hold chore details
   const [chore, setChore] = useState({
@@ -37,8 +38,13 @@ const AddChore = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!chore.name) {
+      alert('Please enter a name for the chore.');
+      return;
+    }
+
     try {
-      const response = await request('POST', 'api/chores/add', {
+      const response = await request('POST', `api/chores/add?id=${id}`, {
         ...chore,
         image: chore.imagePath,
       });
@@ -77,7 +83,9 @@ const AddChore = () => {
 
   // add chores form page
   return (
-    <div>
+    <div >
+       <Navbar />
+                
       <h1>Create a new Chore</h1>
 
       <form class='group' onSubmit={handleSubmit}>
@@ -134,6 +142,7 @@ const AddChore = () => {
         </div>
       </form>
     </div>
+    
   );
 };
 

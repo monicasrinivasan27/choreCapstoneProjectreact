@@ -4,6 +4,7 @@ import { useNavigate,Link } from 'react-router-dom';
 import AssignChore from './AssignChore';
 import { request,getAuthToken} from '../../axios_helper'; 
 import getUserIdFromAuthToken from '../../axios_helper';
+import Navbar from '../Navbar';
 
 
 const ChoresList = () => {
@@ -12,6 +13,7 @@ const ChoresList = () => {
 
   // State to store the list of chores
   const [chores, setChores] = useState([]);
+  const id = getUserIdFromAuthToken(getAuthToken());
 
   
   
@@ -43,20 +45,19 @@ const ChoresList = () => {
   // Effect hook to fetch chores when the component mounts
   useEffect(() => {
     const fetchChores = async () => {
+      
       try {
-        
-        const response = await request('get', 'api/chores/list');
+        // Use the userId in the URL to fetch chores related to that specific user
+        const response = await request('get', `api/chores/list?id=${id}`);
         const data = response.data;
-       
         setChores(data);
       } catch (error) {
         console.error('Error fetching chores:', error.message);
       }
     };
 
-    // Call the fetchChores function
     fetchChores();
-  }, []);
+  }, [id]);
 
   // Function to handle chore deletion
   const handleDelete = async (choreId) => {
@@ -78,17 +79,18 @@ const ChoresList = () => {
 
 
   return (
-    <div>
-      <div>
-        <h1>List of Chores</h1>
+    <div >
 
+      <Navbar/>
+          
+      <div>
         {/* Display the list of chores */}
         <ul className="chore-container">
           {chores && chores.map && chores.map((chore) => (
             <div className="chore-item" key={chore.choreId}>
               <div className="chore-details">
-                <strong>Name:</strong> {chore.name}<br />
-                <strong>Description:</strong> {chore.description}<br />
+                <strong> {chore.name}</strong> <br />
+                 {chore.description}<br />
 
                 {/* Display chore image if available */}
                 <div>

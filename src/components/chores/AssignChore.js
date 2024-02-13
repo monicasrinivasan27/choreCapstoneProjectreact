@@ -68,6 +68,26 @@ const AssignChore = ({ choreId,id ,handleAssignChore}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!selectedKid) {
+      alert('Please select a kid.');
+      return;
+    }
+  
+    if (!dueDate) {
+      alert('Please select a due date.');
+      return;
+    }
+  
+    if (!selectedValueType) {
+      alert('Please select a value type.');
+      return;
+    }
+  
+    if (!selectedValue || selectedValue < 1 || selectedValue > 100) {
+      alert('Please enter a valid value between 1 and 100.');
+      return;
+    }
+  
     const authToken = getAuthToken();
       const id = getUserIdFromAuthToken(authToken);
     await handleAssignChore(id,choreId, selectedKid, dueDate, selectedValueType, selectedValue);

@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import '../../styles/ChoreStyles.css';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { request } from '../../axios_helper';
+import { request,getAuthToken,} from '../../axios_helper'; 
+import getUserIdFromAuthToken from '../../axios_helper';
 
 
 const UpdateChore = () => {
@@ -35,10 +36,11 @@ const UpdateChore = () => {
 
 
   useEffect(() => {
+    const id = getUserIdFromAuthToken(getAuthToken());
     if (choreId) {
       const fetchChoreDetails = async () => {
         try {
-          const response = await request('get', `api/chores/edit/${choreId}`);
+          const response = await request('get', `api/chores/edit/${choreId}?id=${id}`);
           if (response.status === 200) {
             const result = response.data;
             setChore(result);
@@ -55,10 +57,11 @@ const UpdateChore = () => {
   }, [choreId]);
 
   const handleSubmit = async (e) => {
+    const id = getUserIdFromAuthToken(getAuthToken());
     e.preventDefault();
 
     try {
-      const response = await request('put', `api/chores/edit/${choreId}`, {
+      const response = await request('put', `api/chores/edit/${choreId}?id=${id}`, {
          ...chore, image: chore.image ,
       });
 

@@ -17,9 +17,7 @@ export default function Header(props) {
                                 <a class="nav-link active" aria-current="page" href="#">Add Child</a>
                             </li>
                             <li class="nav-item">
-                            <Link to="/api/chores/add" className="button">
-          Create
-        </Link>
+                                <a class="nav-link active" aria-current="page" href="#">Create Chore</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">

@@ -1,15 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
-import '../../styles/ChoreStyles.css';
+import '../../styles/AssignedChoresStyles.css';
 import { request, getAuthToken } from '../../axios_helper';
 import getUserIdFromAuthToken from '../../axios_helper';
+import Navbar from '../Navbar';
+
 
 const AssignedChoresPage = () => {
   const [assignedChores, setAssignedChores] = useState([]);
+  const id = getUserIdFromAuthToken(getAuthToken());
 
   const fetchAssignedChores = async () => {
     try {
-      const id = getUserIdFromAuthToken(getAuthToken());
+
       const response = await request('get', `api/assignments/assigned-chores/${id}`);
 
       if (response.status === 200) {
@@ -70,6 +73,9 @@ const AssignedChoresPage = () => {
 
   return (
     <div>
+    
+       <Navbar />
+      
       <h1>Assigned Chores</h1>
       {Array.isArray(assignedChores) &&
         assignedChores.map((item) => (
@@ -81,12 +87,16 @@ const AssignedChoresPage = () => {
                 {item.chores
                   .filter((chore) => chore.status === 'ASSIGNED')
                   .map((chore) => (
-                    <div key={chore.choreId} className="chore-item">
+                    <div key={chore.choreId} className="card-item">
                       <div>
                         <h4>{chore.name}</h4>
                         <p>{chore.description}</p>
                         <p>
-                          <strong>Due Date:</strong> {new Date(...chore.dueDate).toISOString().split('T')[0]}
+                          <p>
+                            <strong>Due Date:</strong> {chore.dueDate ? chore.dueDate.join('/') : ''}
+
+                          </p>
+
                         </p>
                         <p>
                           <strong>Value Type:</strong> {chore.valueType}
@@ -107,7 +117,7 @@ const AssignedChoresPage = () => {
                 {item.chores
                   .filter((chore) => chore.status === 'COMPLETED')
                   .map((chore) => (
-                    <div key={chore.choreId} className="chore-item">
+                    <div key={chore.choreId} className="card-item">
                       <div>
                         <h4>{chore.name}</h4>
                         <p>{chore.description}</p>
@@ -132,7 +142,7 @@ const AssignedChoresPage = () => {
                 {item.chores
                   .filter((chore) => chore.status === 'APPROVED')
                   .map((chore) => (
-                    <div key={chore.choreId} className="chore-item">
+                    <div key={chore.choreId} className="card-item">
                       <div>
                         <h4>{chore.name}</h4>
                         <p>{chore.description}</p>

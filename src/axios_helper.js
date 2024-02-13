@@ -15,11 +15,6 @@ export const setAuthToken = (token) => {
     window.localStorage.setItem("auth_token", token)
 }
 
-// export const request = async (method, url, data) => {
-//     let headers = {}
-//     if (getAuthToken() !== null && getAuthToken() !== "null") {
-//         headers = {"Authorization": `Bearer ${getAuthToken()}`}
-//     }
 
 export const request = async (method, url, data, id) => {
     let headers = {};
@@ -48,5 +43,6 @@ const getUserIdFromAuthToken = (token) => {
         return null;
     }
 };
+
 
 export default getUserIdFromAuthToken;
