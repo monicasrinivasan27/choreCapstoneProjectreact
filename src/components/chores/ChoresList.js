@@ -1,47 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import '../../styles/ChoreStyles.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import AssignChore from './AssignChore';
+import { request,getAuthToken} from '../../axios_helper'; 
+import getUserIdFromAuthToken from '../../axios_helper';
 
-// ChoresList component
+
 const ChoresList = () => {
-  // Initialize the useNavigate hook for navigation
+ 
   const navigate = useNavigate();
 
   // State to store the list of chores
   const [chores, setChores] = useState([]);
 
+  
+  
+
   // Function to handle chore assignment
-  const handleAssignChore = async (choreId, selectedKid, dueDate, selectedValueType, selectedValue) => {
-    // Format the due date to a string
-    const formattedDueDate = dueDate.toISOString().split('T')[0];
+  const handleAssignChore = async (id , choreId, selectedKid, dueDate, selectedValueType, selectedValue) => {
+    try {
 
-    // Send a POST request to assign the chore
-    const response = await fetch(`http://localhost:8080/api/assignments/${choreId}/${selectedKid}?dueDate=${formattedDueDate}&valueType=${selectedValueType}&value=${selectedValue}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
 
-    // Check if the request was successful and navigate accordingly
-    if (response.ok) {
-      console.log('Chore assigned successfully');
-      navigate('/api/assignments/assigned-chores');
-    } else {
-      console.error('Failed to assign chore');
+      // Format the due date to a string
+      const formattedDueDate = dueDate.toISOString().split('T')[0];
+      const url = `api/assignments/${id}/${choreId}/${selectedKid}?dueDate=${formattedDueDate}&valueType=${selectedValueType}&value=${selectedValue}`;
+
+      // Send a POST request to assign the chore using axios
+      const response = await request('post', url);
+
+      // Check if the request was successful and navigate accordingly
+      if (response.status === 200) {
+        console.log('Chore assigned successfully');
+        navigate(`/api/assignments/assigned-chores/${id}`);
+      } else {
+        console.error('Failed to assign chore');
+      }
+    } catch (error) {
+      console.error('Error during chore assignment:', error.message);
     }
   };
 
   // Effect hook to fetch chores when the component mounts
   useEffect(() => {
     const fetchChores = async () => {
-      // Fetch the list of chores from the API
-      const response = await fetch('http://localhost:8080/api/chores/list');
-      const data = await response.json();
-      // Update the state with the fetched data
-      setChores(data);
+      try {
+        
+        const response = await request('get', 'api/chores/list');
+        const data = response.data;
+       
+        setChores(data);
+      } catch (error) {
+        console.error('Error fetching chores:', error.message);
+      }
     };
 
     // Call the fetchChores function
@@ -50,17 +60,19 @@ const ChoresList = () => {
 
   // Function to handle chore deletion
   const handleDelete = async (choreId) => {
-    // Send a DELETE request to delete the chore
-    const response = await fetch(`http://localhost:8080/api/chores/${choreId}`, {
-      method: 'DELETE',
-    });
+    try {
+      // Send a DELETE request to delete the chore using axios
+      const response = await request('delete', `api/chores/${choreId}`);
 
-    // Check if the request was successful and reload the page
-    if (response.ok) {
-      console.log('Chore deleted successfully');
-      window.location.reload();
-    } else {
-      console.error('Failed to delete chore');
+      // Check if the request was successful and reload the page
+      if (response.status === 200) {
+        console.log('Chore deleted successfully');
+        window.location.reload();
+      } else {
+        console.error('Failed to delete chore');
+      }
+    } catch (error) {
+      console.error('Error during chore deletion:', error.message);
     }
   };
 
@@ -101,7 +113,8 @@ const ChoresList = () => {
                 </button>
 
                 {/* Component for assigning chore */}
-                <AssignChore choreId={chore.choreId} handleAssignChore={handleAssignChore} />
+                <AssignChore choreId={chore.choreId}  handleAssignChore={handleAssignChore} />
+
               </div>
             </div>
           ))}

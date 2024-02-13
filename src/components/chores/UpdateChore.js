@@ -3,17 +3,13 @@ import React, { useState, useEffect } from 'react';
 import '../../styles/ChoreStyles.css';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { request } from '../../axios_helper';
 
 
-// Functional component to edit a chore
 const UpdateChore = () => {
-  // Hook to manage navigation between pages
   const navigate = useNavigate();
-
-  // Get the choreId parameter from the route
   const { choreId } = useParams();
 
-  // State to hold the chore details
   const [chore, setChore] = useState({
     name: '',
     description: '',
@@ -38,23 +34,13 @@ const UpdateChore = () => {
   ];
 
 
-  // Fetch chore details from the server when the component mounts
   useEffect(() => {
-    console.log('Chore ID:', choreId);
-
-    // Check if choreId exists
     if (choreId) {
       const fetchChoreDetails = async () => {
         try {
-          // Fetch chore details from the server based on choreId
-          const response = await fetch(`http://localhost:8080/api/chores/edit/${choreId}`);
-          console.log('Response:', response);
-
-          // Check if the request was successful
-          if (response.ok) {
-            const result = await response.json();
-            console.log('Chore Details:', result);
-            // Update state with fetched chore details
+          const response = await request('get', `api/chores/edit/${choreId}`);
+          if (response.status === 200) {
+            const result = response.data;
             setChore(result);
           } else {
             console.error('Failed to fetch chore details');
@@ -64,55 +50,46 @@ const UpdateChore = () => {
         }
       };
 
-      // Call the fetchChoreDetails function
       fetchChoreDetails();
     }
   }, [choreId]);
 
-  // Function to handle form submission for updating the chore
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Send a PUT request to the server to update the chore
-    const response = await fetch(`http://localhost:8080/api/chores/edit/${choreId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...chore, image: chore.image }),
-    });
+    try {
+      const response = await request('put', `api/chores/edit/${choreId}`, {
+         ...chore, image: chore.image ,
+      });
 
-    // Check if the request was successful
-    if (response.ok) {
-      console.log('Chore updated successfully');
-      // Navigate to the list of chores page after successful update
-      navigate('/api/chores/list');
-    } else {
-      console.error('Failed to update chore');
+      if (response.status === 200) {
+        console.log('Chore updated successfully');
+        navigate('/api/chores/list');
+      } else {
+        console.error('Failed to update chore');
+      }
+    } catch (error) {
+      console.error('Error during chore update:', error.message);
     }
   };
 
-  // Function to handle image selection
-  function handleImageChange(event) {
+  const handleImageChange = (event) => {
     const selectedImage = event.target.value;
     setChore({ ...chore, image: selectedImage });
-  }
+  };
 
-  // Function to handle input field changes
-  function handleChange(event) {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setChore({ ...chore, [name]: value });
-  }
+  };
 
-  // Function to determine the image source for display
-  function handleImageSource() {
+  const handleImageSource = () => {
     if (choreId && !chore.image.includes('/images/')) {
       return `/images/${chore.image}`;
     }
     return chore.image;
-  }
+  };
 
-  // update form page
 
   return (
     <div>

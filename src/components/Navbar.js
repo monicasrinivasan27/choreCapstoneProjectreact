@@ -1,5 +1,6 @@
 import * as React from 'react';
 import '../styles/Navbar.css'
+import { Link } from 'react-router-dom';
 
 export default function Header(props) {
     return (
@@ -16,7 +17,9 @@ export default function Header(props) {
                                 <a class="nav-link active" aria-current="page" href="#">Add Child</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Create Chore</a>
+                            <Link to="/api/chores/add" className="button">
+          Create
+        </Link>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">

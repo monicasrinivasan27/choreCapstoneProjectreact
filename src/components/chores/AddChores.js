@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import '../../styles/ChoreStyles.css';
 import { useNavigate } from 'react-router-dom';
+import { request } from '../../axios_helper'; 
 
 
 // Functional component for adding a new chore
@@ -33,35 +34,33 @@ const AddChore = () => {
     { value: 'clean_vanity.jpg', label: 'clean vanity Image' },
   ];
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Send a POST request to the server to add the new chore
-    const response = await fetch(`http://localhost:8080/api/chores/add`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...chore, image: chore.imagePath }),
-    });
-
-    // Check if the request was successful
-    if (response.ok) {
-      console.log('Chore added successfully');
-      // Clear the form fields after successful addition
-      setChore({
-        name: '',
-        description: '',
-        selectedImage: '',
-        imagePath: '',
+    try {
+      const response = await request('POST', 'api/chores/add', {
+        ...chore,
+        image: chore.imagePath,
       });
-      // Navigate to the list of chores page
-      navigate('/api/chores/list');
-    } else {
-      console.error('Failed to add chore');
+      
+
+      if (response.status === 200) {
+        console.log('Chore added successfully');
+        setChore({
+          name: '',
+          description: '',
+          selectedImage: '',
+          imagePath: '',
+        });
+        navigate('/api/chores/list'); // Redirect to the list of chores page
+      } else {
+        console.error('Failed to add chore');
+      }
+    } catch (error) {
+      console.error('Error adding chore:', error);
     }
   };
+
 
   // Function to handle image selection
   function handleImageChange(event) {

@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaCalendarAlt } from 'react-icons/fa';
 import '../../styles/ChoreStyles.css';
+import { request,getAuthToken,} from '../../axios_helper'; 
+import getUserIdFromAuthToken from '../../axios_helper';
 
 // Calendar icon component
 const CalendarIcon = React.forwardRef(({ onClick }, ref) => (
@@ -12,24 +14,40 @@ const CalendarIcon = React.forwardRef(({ onClick }, ref) => (
 ));
 
 // Main component to assign chores
-const AssignChore = ({ choreId, handleAssignChore }) => {
+const AssignChore = ({ choreId,id ,handleAssignChore}) => {
   // State variables to keep track of selected values
   const [selectedKid, setSelectedKid] = useState('');
   const [dueDate, setDueDate] = useState(null);
-  const [selectedValueType, setSelectedValueType] = useState('points');
+  const [selectedValueType, setSelectedValueType] = useState('Points');
   const [selectedValue, setSelectedValue] = useState(1);
+ 
   const [kids, setKids] = useState([]);
 
   // Fetch the list of kids from the server when the component is mounted
-  useEffect(() => {
-    fetch('http://localhost:8080/api/assignments/kids')
-      .then(response => response.json())
-      .then(data => setKids(data))
-      .catch(error => console.error('Error fetching kids:', error));
-  }, []);
+  
+    const fetchKids = async () => {
+      try {
+         const id = getUserIdFromAuthToken(getAuthToken());
+        // Fetch the list of kids from the server using axios
+        const response = await request('get', 'api/assignments/kids', null, id);
+        if (response.status === 200) {
+          
+           setKids(response.data);
+
+        } else {
+          console.error('Failed to fetch kids');
+        }
+      } catch (error) {
+        console.error('Error fetching kids:', error.message);
+      }
+    };
+    useEffect(() => {
+    // Call the fetchKids function
+    fetchKids();
+  }, [id]);
 
   // Handler function for changing the selected kid
-  const handleKidChange = (e) => {
+  const handleKidChange = (e,id) => {
     setSelectedKid(e.target.value);
   };
 
@@ -48,31 +66,29 @@ const AssignChore = ({ choreId, handleAssignChore }) => {
     setSelectedValue(parseInt(e.target.value, 10));
   };
 
-  // Handler function for form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleAssignChore(choreId, selectedKid, dueDate, selectedValueType, selectedValue);
+    const authToken = getAuthToken();
+      const id = getUserIdFromAuthToken(authToken);
+    await handleAssignChore(id,choreId, selectedKid, dueDate, selectedValueType, selectedValue);
   }
+
 
 
   return (
     <form onSubmit={handleSubmit}>
       {/* Dropdown for selecting a kid */}
       <div className='date-kid'>
-
         <select value={selectedKid} onChange={handleKidChange}>
           <option value="">Select Kid</option>
-          {kids.map((kid) => (
+          {kids && Array.isArray(kids) && kids.map((kid) => (
             <option key={kid.kidId} value={kid.kidId}>
               {kid.name}
             </option>
           ))}
         </select>
 
-
         {/* Date picker for selecting a due date */}
-
-
         <DatePicker
           id="dueDate"
           selected={dueDate}
@@ -80,22 +96,16 @@ const AssignChore = ({ choreId, handleAssignChore }) => {
           customInput={<CalendarIcon />}
           dateFormat="yyyy-MM-dd"
         />
-
-
       </div>
 
       {/* Dropdown for selecting value type (points or dollars) */}
       <div className='date-kid'>
-
         <select value={selectedValueType} onChange={handleValueTypeChange}>
-          <option value="Points">Points</option>
-          <option value="Dollars">Dollars</option>
+          <option value="POINTS">Points</option>
+          <option value="DOLLARS">Dollars</option>
         </select>
 
-
         {/* Number input for selecting a value */}
-
-
         <input
           type="number"
           value={selectedValue}
@@ -105,17 +115,12 @@ const AssignChore = ({ choreId, handleAssignChore }) => {
         />
       </div>
 
-
       {/* Hidden input for storing choreId */}
       <input type="hidden" name="choreId" value={choreId} />
       {/* Button to submit the form */}
       <button type="submit">Assign</button>
     </form>
-
-
   );
 };
 
 export default AssignChore;
-
-

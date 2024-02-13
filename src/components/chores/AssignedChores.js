@@ -1,58 +1,73 @@
+
 import React, { useState, useEffect } from 'react';
 import '../../styles/ChoreStyles.css';
+import { request, getAuthToken } from '../../axios_helper';
+import getUserIdFromAuthToken from '../../axios_helper';
 
-// Function component for the Assigned Chores page
 const AssignedChoresPage = () => {
-  // State to store assigned chores data
   const [assignedChores, setAssignedChores] = useState([]);
 
-  // Function to fetch assigned chores from the server
   const fetchAssignedChores = async () => {
     try {
-      // Fetch assigned chores from the server API
-      const response = await fetch('http://localhost:8080/api/assignments/assigned-chores');
+      const id = getUserIdFromAuthToken(getAuthToken());
+      const response = await request('get', `api/assignments/assigned-chores/${id}`);
 
-      if (response.ok) {
-        // If the response is successful, set the fetched data to the state
-        const data = await response.json();
+      if (response.status === 200) {
+        const data = response.data;
+        console.log(data);
         setAssignedChores(data);
       } else {
-        // Handle error if fetching fails
         console.error('Failed to fetch assigned chores');
       }
     } catch (error) {
-      // Handle errors during the fetch operation
       console.error('Failed to fetch assigned chores', error);
     }
   };
 
-  // Use effect to fetch assigned chores when the component mounts
   useEffect(() => {
     fetchAssignedChores();
   }, []);
 
-  // Function to handle deleting a chore
   const handleDeleteChore = async (choreId) => {
-    // Send a request to the server to delete the assigned chore
-      const response = await fetch(`http://localhost:8080/api/assignments/assigned-chores/${choreId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    try {
+      const response = await request('delete', `api/assignments/assigned-chores/${choreId}`);
 
-      if (response.ok) {
-        // If deletion is successful, update the UI by refetching assigned chores
+      if (response.status === 200) {
         fetchAssignedChores();
         console.log('Assigned chore deleted successfully');
       } else {
-        // Handle error if deletion fails
         console.error('Failed to delete assigned chore');
       }
-    
+    } catch (error) {
+      console.error('Error during chore deletion:', error.message);
+    }
   };
 
-  
+  const handleApproveChore = async (choreId) => {
+    try {
+      const id = getUserIdFromAuthToken(getAuthToken());
+      const response = await request('post', `api/status/approve/${choreId}/${id}`);
+
+      if (response.status === 200) {
+        console.log('Chore approved successfully');
+
+        setAssignedChores((prevAssignedChores) => {
+          const updatedChores = prevAssignedChores.map((item) => ({
+            ...item,
+            chores: item.chores.map((chore) =>
+              chore.choreId === choreId ? { ...chore, status: 'APPROVED' } : chore
+            ),
+          }));
+          return updatedChores;
+        });
+      } else {
+        console.error('Failed to approve chore');
+      }
+    } catch (error) {
+      console.error('Failed to approve chore', error.message);
+    }
+  };
+
   return (
     <div>
       <h1>Assigned Chores</h1>
@@ -71,7 +86,7 @@ const AssignedChoresPage = () => {
                         <h4>{chore.name}</h4>
                         <p>{chore.description}</p>
                         <p>
-                          <strong>Due Date:</strong> {chore.dueDate}
+                          <strong>Due Date:</strong> {new Date(...chore.dueDate).toISOString().split('T')[0]}
                         </p>
                         <p>
                           <strong>Value Type:</strong> {chore.valueType}
@@ -82,7 +97,6 @@ const AssignedChoresPage = () => {
                         <p>
                           <strong>Status:</strong> {chore.status}
                         </p>
-                        {/* Button to delete the chore */}
                         <button className='button' onClick={() => handleDeleteChore(chore.choreId)}>Delete</button>
                       </div>
                     </div>
@@ -98,8 +112,30 @@ const AssignedChoresPage = () => {
                         <h4>{chore.name}</h4>
                         <p>{chore.description}</p>
                         <p>
-                          <strong>Due Date:</strong> {chore.dueDate}
+                          <strong>Value Type:</strong> {chore.valueType}
                         </p>
+                        <p>
+                          <strong>Value:</strong> {chore.value}
+                        </p>
+                        <p>
+                          <strong>Status:</strong> {chore.status}
+                        </p>
+                        {chore.status === 'COMPLETED' && (
+                          <button type="submit" onClick={() => handleApproveChore(chore.choreId)}>Approve</button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+              <div className="flex-section">
+                <h3>Approved Chores</h3>
+                {item.chores
+                  .filter((chore) => chore.status === 'APPROVED')
+                  .map((chore) => (
+                    <div key={chore.choreId} className="chore-item">
+                      <div>
+                        <h4>{chore.name}</h4>
+                        <p>{chore.description}</p>
                         <p>
                           <strong>Value Type:</strong> {chore.valueType}
                         </p>
@@ -109,10 +145,6 @@ const AssignedChoresPage = () => {
                         <p>
                           <strong>Status:</strong> {chore.status}
                         </p>
-                        {/* Button to approve the chore */}
-                        {/* {chore.status === 'COMPLETED' && (
-                          <button onClick={() => handleApproveChore(chore.choreId)}>Approve</button>
-                        )} */}
                       </div>
                     </div>
                   ))}
