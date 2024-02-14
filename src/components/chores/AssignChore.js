@@ -121,8 +121,8 @@ const AssignChore = ({ choreId,id ,handleAssignChore}) => {
       {/* Dropdown for selecting value type (points or dollars) */}
       <div className='date-kid'>
         <select value={selectedValueType} onChange={handleValueTypeChange}>
-          <option value="POINTS">Points</option>
-          <option value="DOLLARS">Dollars</option>
+          <option value="Points">Points</option>
+          <option value="Dollars">Dollars</option>
         </select>
 
         {/* Number input for selecting a value */}

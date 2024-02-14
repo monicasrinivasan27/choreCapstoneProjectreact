@@ -15,11 +15,13 @@ import EditReward from './components/rewards/EditReward';
 import ApiCall from './components/api/ApiCall';
 import ParentStatistics from './components/ParentStatistics';
 
+
 function App() {
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />
       <Route path='/api/register' element={<Register />} />
+     
       <Route path='/api/parentLogin' element={<ParentLogin />} />
       <Route path='/api/parentDash' element={<ParentDashboard />} />
       <Route path='/api/parent-dashboard/statistics' element={<ParentStatistics />} />
