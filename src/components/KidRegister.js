@@ -84,8 +84,8 @@ const KidRegister= () => {
                         <label className='form-label' htmlFor='verifyPassword'>Verify Password</label>
                     </div>
                     <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
-                        {/* <button type='submit' className='btn btn-primary register-btn'>Create Account</button> */}
-                        <a type="submit" class="btn btn-primary register-btn" href="Parent-dashboard">Create Account</a>
+                        <button type='submit' className='btn btn-primary register-btn'>Create Account</button>
+                        {/* <a type="submit" role='submit' class="btn btn-primary register-btn" href="Parent-dashboard">Create Account</a> */}
                     </div>
                 </form>
             </div>
