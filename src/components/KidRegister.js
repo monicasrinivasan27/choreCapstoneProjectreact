@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { request, setAuthToken } from '../axios_helper';
+import bootstrap from 'bootstrap';
 import'../styles/Register.css';
 
 const KidRegister= () => {
@@ -39,7 +40,7 @@ const KidRegister= () => {
                 password: "",
                 verifyPassword: "",
             });
-            navigate('/api/parentDash')
+            navigate('/api/parent-dashboard')
         })
         .catch((error) => {
             console.error("Registration failed:", error);
@@ -64,8 +65,8 @@ const KidRegister= () => {
                         </div>
                     </div>
                     <div className='form-outline mb-4'>
-                        <input type='text input-lg' id='firstName' name='firstName' className='form-control' onChange={onChangeHandler} />
-                        <label className='form-label' htmlFor='firstName'>First Name</label>
+                        <input type='text input-lg' id='name' name='name' className='form-control' onChange={onChangeHandler} />
+                        <label className='form-label' htmlFor='name'>First Name</label>
                     </div>
 
                     <div className='form-outline mb-4'>
@@ -83,8 +84,8 @@ const KidRegister= () => {
                         <label className='form-label' htmlFor='verifyPassword'>Verify Password</label>
                     </div>
                     <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
-                        {/* <button className='btn btn-primary register-btn' type='submit'>Create Account</button> */}
-                        <a class="btn btn-primary register-btn" href="Parent-dashboard" type="submit" role="submit" >Create Account</a>
+                        {/* <button type='submit' className='btn btn-primary register-btn'>Create Account</button> */}
+                        <a type="submit" class="btn btn-primary register-btn" href="Parent-dashboard">Create Account</a>
                     </div>
                 </form>
             </div>
