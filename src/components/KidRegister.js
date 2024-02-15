@@ -8,7 +8,7 @@ const KidRegister= () => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        firstName: "",
+        name: "",
         username: "",
         password: "",
         verifyPassword: "",
@@ -17,7 +17,7 @@ const KidRegister= () => {
     useEffect(() => {
 
         setFormData({
-            firstName: "",
+            name: "",
             username: "",
             password: "",
             verifyPassword: "",
@@ -35,7 +35,7 @@ const KidRegister= () => {
         .then((response) => {
             setAuthToken(response.data.token);
             setFormData({
-                firstName: "",
+                name: "",
                 username: "",
                 password: "",
                 verifyPassword: "",
@@ -65,7 +65,7 @@ const KidRegister= () => {
                         </div>
                     </div>
                     <div className='form-outline mb-4'>
-                        <input type='text input-lg' id='name' name='name' className='form-control' onChange={onChangeHandler} />
+                        <input type='text input-lg' id='firstName' name='name' className='form-control' onChange={onChangeHandler} />
                         <label className='form-label' htmlFor='name'>First Name</label>
                     </div>
 
@@ -85,7 +85,6 @@ const KidRegister= () => {
                     </div>
                     <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
                         <button type='submit' className='btn btn-primary register-btn'>Create Account</button>
-                        {/* <a type="submit" role='submit' class="btn btn-primary register-btn" href="Parent-dashboard">Create Account</a> */}
                     </div>
                 </form>
             </div>
