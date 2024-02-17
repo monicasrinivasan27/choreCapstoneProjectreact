@@ -43,7 +43,7 @@ const AddChore = () => {
       return;
     }
 
-    try {
+    
       const response = await request('POST', `api/chores/add?id=${id}`, {
         ...chore,
         image: chore.imagePath,
@@ -62,9 +62,7 @@ const AddChore = () => {
       } else {
         console.error('Failed to add chore');
       }
-    } catch (error) {
-      console.error('Error adding chore:', error);
-    }
+    
   };
 
 

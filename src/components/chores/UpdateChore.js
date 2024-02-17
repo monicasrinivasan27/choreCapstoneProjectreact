@@ -39,7 +39,7 @@ const UpdateChore = () => {
     const id = getUserIdFromAuthToken(getAuthToken());
     if (choreId) {
       const fetchChoreDetails = async () => {
-        try {
+       
           const response = await request('get', `api/chores/edit/${choreId}?id=${id}`);
           if (response.status === 200) {
             const result = response.data;
@@ -47,9 +47,7 @@ const UpdateChore = () => {
           } else {
             console.error('Failed to fetch chore details');
           }
-        } catch (error) {
-          console.error('Error fetching chore details:', error.message);
-        }
+       
       };
 
       fetchChoreDetails();
@@ -60,7 +58,7 @@ const UpdateChore = () => {
     const id = getUserIdFromAuthToken(getAuthToken());
     e.preventDefault();
 
-    try {
+    
       const response = await request('put', `api/chores/edit/${choreId}?id=${id}`, {
          ...chore, image: chore.image ,
       });
@@ -71,10 +69,7 @@ const UpdateChore = () => {
       } else {
         console.error('Failed to update chore');
       }
-    } catch (error) {
-      console.error('Error during chore update:', error.message);
-    }
-  };
+    };
 
   const handleImageChange = (event) => {
     const selectedImage = event.target.value;

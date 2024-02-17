@@ -113,10 +113,13 @@ tr {
 .date-kid {
   display: block;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   font-size: small;
+  }
 
-}
+/* .assign_form{
+  border:none !important;
+} */
 
 form.group {
   margin: auto;

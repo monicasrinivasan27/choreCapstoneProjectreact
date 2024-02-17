@@ -26,7 +26,7 @@ const AssignChore = ({ choreId,id ,handleAssignChore}) => {
   // Fetch the list of kids from the server when the component is mounted
   
     const fetchKids = async () => {
-      try {
+      
          const id = getUserIdFromAuthToken(getAuthToken());
         // Fetch the list of kids from the server using axios
         const response = await request('get', 'api/assignments/kids', null, id);
@@ -37,9 +37,7 @@ const AssignChore = ({ choreId,id ,handleAssignChore}) => {
         } else {
           console.error('Failed to fetch kids');
         }
-      } catch (error) {
-        console.error('Error fetching kids:', error.message);
-      }
+      
     };
     useEffect(() => {
     // Call the fetchKids function
@@ -96,7 +94,7 @@ const AssignChore = ({ choreId,id ,handleAssignChore}) => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='assign_form' onSubmit={handleSubmit}>
       {/* Dropdown for selecting a kid */}
       <div className='date-kid'>
         <select value={selectedKid} onChange={handleKidChange}>

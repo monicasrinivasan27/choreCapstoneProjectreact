@@ -13,8 +13,11 @@ export default function Header(props) {
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/api/parentDash">Home</a>
+                            </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Add Child</a>
+                                <a class="nav-link active" aria-current="page" href="/api/kidRegister">Add Child</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/api/chores/add">Create Chore</a>
@@ -25,16 +28,7 @@ export default function Header(props) {
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/api/assignments/assigned-chores/:id">Assigned Chores</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                                    Select Child
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Child 1</a></li>
-                                    <li><a class="dropdown-item" href="#">Child 2</a></li>
-                                    <li><a class="dropdown-item" href="#">Child 3</a></li>
-                                </ul>
-                            </li>
+                            
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">Logout</a>
                             </li>

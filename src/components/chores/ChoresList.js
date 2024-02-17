@@ -20,10 +20,7 @@ const ChoresList = () => {
 
   // Function to handle chore assignment
   const handleAssignChore = async (id , choreId, selectedKid, dueDate, selectedValueType, selectedValue) => {
-    try {
-
-
-      // Format the due date to a string
+    // Format the due date to a string
       const formattedDueDate = dueDate.toISOString().split('T')[0];
       const url = `api/assignments/${id}/${choreId}/${selectedKid}?dueDate=${formattedDueDate}&valueType=${selectedValueType}&value=${selectedValue}`;
 
@@ -37,23 +34,16 @@ const ChoresList = () => {
       } else {
         console.error('Failed to assign chore');
       }
-    } catch (error) {
-      console.error('Error during chore assignment:', error.message);
-    }
+    
   };
 
   // Effect hook to fetch chores when the component mounts
   useEffect(() => {
     const fetchChores = async () => {
-      
-      try {
-        // Use the userId in the URL to fetch chores related to that specific user
-        const response = await request('get', `api/chores/list?id=${id}`);
+      const response = await request('get', `api/chores/list?id=${id}`);
         const data = response.data;
         setChores(data);
-      } catch (error) {
-        console.error('Error fetching chores:', error.message);
-      }
+     
     };
 
     fetchChores();
@@ -61,7 +51,7 @@ const ChoresList = () => {
 
   // Function to handle chore deletion
   const handleDelete = async (choreId) => {
-    try {
+   
       // Send a DELETE request to delete the chore using axios
       const response = await request('delete', `api/chores/${choreId}`);
 
@@ -72,9 +62,7 @@ const ChoresList = () => {
       } else {
         console.error('Failed to delete chore');
       }
-    } catch (error) {
-      console.error('Error during chore deletion:', error.message);
-    }
+    
   };
 
 
@@ -122,13 +110,6 @@ const ChoresList = () => {
           ))}
         </ul>
       </div>
-
-      {/* Link to add a new chore */}
-      <p>
-        <Link to="/api/chores/add" className="button">
-          Create
-        </Link>
-      </p>
     </div>
   );
 };
