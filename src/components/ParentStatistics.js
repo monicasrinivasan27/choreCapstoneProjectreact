@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { request,getAuthToken } from '../axios_helper'; 
+import { request,getAuthToken,getUserIdFromAuthToken } from '../axios_helper'; 
 import '../styles/ParentDashboardStyles.css';
-import getUserIdFromAuthToken from '../axios_helper';
+
 
 const ParentStatistics = () => {
   const [dashboardData, setDashboardData] = useState([]);

@@ -34,7 +34,7 @@ export const request = async (method, url, data, id) => {
     });
 };
 
-const getUserIdFromAuthToken = (token) => {
+export const getUserIdFromAuthToken = (token) => {
     try {
         const decodedToken = jwtDecode(token);
         return decodedToken.id;
@@ -45,4 +45,5 @@ const getUserIdFromAuthToken = (token) => {
 };
 
 
-export default getUserIdFromAuthToken;
+
+//export default getUserIdFromAuthToken;

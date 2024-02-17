@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import '../../styles/ChoreStyles.css';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { request,getAuthToken,} from '../../axios_helper'; 
-import getUserIdFromAuthToken from '../../axios_helper';
+import { request,getAuthToken,getUserIdFromAuthToken} from '../../axios_helper'; 
 
 
 const UpdateChore = () => {
