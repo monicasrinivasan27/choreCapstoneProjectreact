@@ -1,0 +1,28 @@
+.body {
+    background-color: #ECF8F9 !important;
+}
+
+.header-logo {
+    margin: 20px;
+}
+
+.register-form {
+    background-color: white;
+    border-color: #3D5656;
+}
+
+.register-btn {
+    background-color: #3D5656 !important;
+    color: #FED049 !important;
+    border: none !important;
+}
+
+.register-btn:hover {
+    background-color: #68B984 !important;
+    color: white !important;
+}
+
+.message {
+    padding-top: 0;
+    padding-bottom: 10px;
+}
