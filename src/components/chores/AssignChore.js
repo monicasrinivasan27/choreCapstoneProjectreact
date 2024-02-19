@@ -94,8 +94,6 @@ const AssignChore = ({ choreId, handleAssignChore }) => {
 
 
         {/* Number input for selecting a value */}
-
-
         <input
           type="number"
           value={selectedValue}
@@ -113,6 +111,8 @@ const AssignChore = ({ choreId, handleAssignChore }) => {
 
   );
 };
+
+
 
 export default AssignChore;
 
