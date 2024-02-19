@@ -110,9 +110,9 @@ const AssignedChoresPage = () => {
                           <strong>Status:</strong> {chore.status}
                         </p>
                         {/* Button to approve the chore */}
-                        {/* {chore.status === 'COMPLETED' && (
+                        {chore.status === 'COMPLETED' && (
                           <button onClick={() => handleApproveChore(chore.choreId)}>Approve</button>
-                        )} */}
+                        )}
                       </div>
                     </div>
                   ))}
