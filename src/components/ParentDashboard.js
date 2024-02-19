@@ -9,8 +9,8 @@ const ParentDashboard = () => {
                 <Navbar />
                 <div className='jumbotron jumbotron'>
                     <div className='container'>
-                        <h1 className='display-4'>Welcome</h1>
-                        <p className='lead'>Let's see if we can get this to work!</p>
+                        <h1 className='display-4' text-align="center">Welcome Amb!</h1>
+                        {/* <p className='lead'>Let's see if we can get this to work!</p> */}
                         <ParentStatistics />   
                     </div>
                 </div>  

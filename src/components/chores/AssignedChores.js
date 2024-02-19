@@ -67,7 +67,7 @@ const AssignedChoresPage = () => {
   return (
     <div>
       <Navbar />
-      <h1>Assigned Chores</h1>
+      
       <div className='btn-chores-container'>
         <button className='btn btn-primary' onClick={() => setActiveTab('assigned')}>Assigned Chores</button>
         <button className='btn btn-primary' onClick={() => setActiveTab('waiting')}>Waiting for Approval</button>

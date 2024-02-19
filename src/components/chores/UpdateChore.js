@@ -4,6 +4,7 @@ import '../../styles/ChoreStyles.css';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { request,getAuthToken,getUserIdFromAuthToken} from '../../axios_helper'; 
+import Navbar from '../Navbar';
 
 
 const UpdateChore = () => {
@@ -90,6 +91,7 @@ const UpdateChore = () => {
 
   return (
     <div>
+    <Navbar />
       <h1>Edit Chore</h1>
 
       <form class='group' onSubmit={handleSubmit}>
