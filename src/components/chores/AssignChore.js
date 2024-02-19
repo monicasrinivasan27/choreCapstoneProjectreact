@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -95,8 +94,6 @@ const AssignChore = ({ choreId, handleAssignChore }) => {
 
 
         {/* Number input for selecting a value */}
-
-
         <input
           type="number"
           value={selectedValue}
@@ -110,5 +107,13 @@ const AssignChore = ({ choreId, handleAssignChore }) => {
       {/* Button to submit the form */}
       <button type="submit">Assign</button>
     </form>
+
+
+  );
+};
+
+
+
+export default AssignChore;
 
 
