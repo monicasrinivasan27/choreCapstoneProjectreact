@@ -104,9 +104,7 @@ const AssignChore = ({ choreId, handleAssignChore }) => {
           max="100"
         />
       </div>
-
-
-      {/* Hidden input for storing choreId */}
+     {/* Hidden input for storing choreId */}
       <input type="hidden" name="choreId" value={choreId} />
       {/* Button to submit the form */}
       <button type="submit">Assign</button>
