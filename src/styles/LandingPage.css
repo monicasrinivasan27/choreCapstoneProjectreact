@@ -2,9 +2,18 @@
     background-color: #ECF8F9;
 }
 
-img {
-    max-width: 50%; 
-    height:auto
+.main {
+    background-color: #ECF8F9;
+    /* min-height: 80vh; */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* margin-bottom: 200px; */
+    margin-top: 7%;
+    min-width: auto;
+    min-height: 500px;
+    width: fit-content;
+    /* height: fit-content; */
 }
 
 .landingPage-image {
@@ -12,7 +21,8 @@ img {
     margin-top: 7%;
     margin-left: auto;
     margin-right: auto;
-    width: max-content;
+    width: 70%;
+    height: auto;
 }
 
 .landingPage-btn {
@@ -21,6 +31,7 @@ img {
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .landingPage-btn:hover {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { request,getAuthToken,getUserIdFromAuthToken } from '../axios_helper'; 
+import { request,getAuthToken } from '../axios_helper'; 
+import getUserIdFromAuthToken from '../axios_helper';
 import '../styles/ParentDashboardStyles.css';
 
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { jwtDecode } from 'jwt-decode';;
+import { jwtDecode } from 'jwt-decode';
 
 
 axios.defaults.baseURL = 'http://localhost:8080/';
@@ -8,6 +8,10 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 export const getAuthToken = () => {
     const token = window.localStorage.getItem("auth_token");
     return token ? `Bearer ${token}` : null;
+};
+
+export const deleteAuthToken = () => {
+    window.localStorage.removeItem("auth_token");
 };
 
 
@@ -34,9 +38,10 @@ export const request = async (method, url, data, id) => {
     });
 };
 
-export const getUserIdFromAuthToken = (token) => {
+const getUserIdFromAuthToken = (token) => {
     try {
         const decodedToken = jwtDecode(token);
+        console.log(decodedToken.id);
         return decodedToken.id;
     } catch (error) {
         console.error('Error decoding token:', error);
@@ -46,4 +51,4 @@ export const getUserIdFromAuthToken = (token) => {
 
 
 
-//export default getUserIdFromAuthToken;
+export default getUserIdFromAuthToken;

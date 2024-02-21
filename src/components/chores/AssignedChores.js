@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import '../../styles/AssignedChoresStyles.css';
-import { request, getAuthToken,getUserIdFromAuthToken} from '../../axios_helper';
+import { request, getAuthToken} from '../../axios_helper';
+import getUserIdFromAuthToken from '../../axios_helper';
 
 import Navbar from '../Navbar';
 
@@ -41,27 +42,26 @@ const AssignedChoresPage = () => {
       }
     };
 
+  // Function to handle approving a chore
   const handleApproveChore = async (choreId) => {
-    
-      const id = getUserIdFromAuthToken(getAuthToken());
-      const response = await request('post', `api/status/approve/${choreId}/${id}`);
+    const id = getUserIdFromAuthToken(getAuthToken());
+    const response = await request('post', `api/status/approve/${choreId}/${id}`);
+    if (response.status === 200) {
+      console.log('Chore approved successfully');
 
-      if (response.status === 200) {
-        console.log('Chore approved successfully');
-
-        setAssignedChores((prevAssignedChores) => {
-          const updatedChores = prevAssignedChores.map((item) => ({
-            ...item,
-            chores: item.chores.map((chore) =>
-              chore.choreId === choreId ? { ...chore, status: 'APPROVED' } : chore
-            ),
-          }));
-          return updatedChores;
-        });
-      } else {
-        console.error('Failed to approve chore');
-      }
-    
+      // Update the state with the approved chore status
+      setAssignedChores((prevAssignedChores) => {
+        const updatedChores = prevAssignedChores.map((item) => ({
+          ...item,
+          chores: item.chores.map((chore) =>
+            chore.choreId === choreId ? { ...chore, status: 'APPROVED' } : chore
+          ),
+        }));
+        return updatedChores;
+      });
+    } else {
+      console.error('Failed to approve chore'); 
+    }
   };
 
   return (

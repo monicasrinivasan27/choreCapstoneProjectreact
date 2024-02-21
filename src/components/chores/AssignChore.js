@@ -3,7 +3,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaCalendarAlt } from 'react-icons/fa';
 import '../../styles/ChoreStyles.css';
-import { request,getAuthToken,getUserIdFromAuthToken} from '../../axios_helper'; 
+import { request,getAuthToken} from '../../axios_helper'; 
+import getUserIdFromAuthToken from '../../axios_helper';
 
 
 // Calendar icon component
