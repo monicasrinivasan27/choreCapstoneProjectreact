@@ -8,7 +8,7 @@ import LandingPage from './components/LandingPage';
 import Register from './components/Register';
 import ParentLogin from './components/ParentLogin';
 import ParentDashboard from './components/ParentDashboard';
-import AssignedChores from './components/chores/AssignedChores';
+import ListOfAssignedChores from './components/chores/ListOfAssignedChores';
 import RewardManagement from './components/rewards/RewardManagement';
 import AddReward from './components/rewards/AddReward';
 import EditReward from './components/rewards/EditReward';
@@ -27,7 +27,7 @@ function App() {
       <Route path='/api/parent-dashboard/statistics' element={<ParentStatistics />} />
       <Route path="/api/chores/add" element={<AddChores />} />
       <Route path="/api/chores/list" element={<ChoresList />} />
-      <Route path="/api/assignments/assigned-chores/:id" element={<AssignedChores />} />
+      <Route path="/api/assignments/assigned-chores/:id" element={<ListOfAssignedChores />} />
       <Route path="/api/chores/edit/:choreId" element={<UpdateChore />} />
       <Route path="/api/date" element={<ApiCall />} />
       <Route path="/allrewards" element={<RewardManagement />} />
