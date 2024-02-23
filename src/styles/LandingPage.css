@@ -2,6 +2,7 @@
     background-color: #ECF8F9;
 }
 
+
 .main {
     background-color: #ECF8F9;
     /* min-height: 80vh; */
@@ -15,6 +16,7 @@
     width: fit-content;
     /* height: fit-content; */
 }
+
 
 .landingPage-image {
     display: block;

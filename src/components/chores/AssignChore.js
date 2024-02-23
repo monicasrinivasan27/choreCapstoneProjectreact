@@ -135,11 +135,14 @@ const AssignChore = ({ choreId,id ,handleAssignChore}) => {
       </div>
 
       {/* Hidden input for storing choreId */}
+
       <input type="hidden" name="choreId" value={choreId} />
       {/* Button to submit the form */}
       <button type="submit">Assign</button>
     </form>
   );
 };
+
+
 
 export default AssignChore;

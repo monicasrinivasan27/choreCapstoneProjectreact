@@ -1,8 +1,13 @@
 import * as React from 'react';
+
 import '../styles/Navbar.css'
 import { Link } from 'react-router-dom';
 
-export default function Header(props) {
+import { useNavigate } from 'react-router';
+
+export default function Navbar() {
+
+
     return (
         <header className='header-body'>
             <nav class="navbar navbar-expand-lg">
@@ -21,7 +26,8 @@ export default function Header(props) {
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/api/chores/add">Create Chore</a>
-                            </li>
+
+                          </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/api/chores/list">Chores List</a>
                             </li>
