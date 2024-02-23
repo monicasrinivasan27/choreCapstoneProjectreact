@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
+
+import React from 'react';
+import Navbar from './Navbar'
+import ParentStatistics from './ParentStatistics';
+
 
 const ParentDashboard = () => {
 
@@ -9,10 +12,12 @@ const ParentDashboard = () => {
                 <Navbar />
                 <div className='jumbotron jumbotron'>
                     <div className='container'>
-                        <h1 className='display-4'>Welcome</h1>
+                        <h1 className='display-4' text-align="center">Welcome!</h1>
                         <p className='lead'>Let's see if we can get this to work!</p>
+                        <ParentStatistics />   
                     </div>
-                </div>                
+                </div>  
+                    
             </div>
         )
     }

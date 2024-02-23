@@ -1,16 +1,31 @@
 html {
-  background-color: #ecf8f9;
+  background-color: #ecf8f9 !important;
 }
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #ecf8f9;
+  background-color: #ecf8f9 !important;
   margin: 10px;
   /* padding: 0;
   display: flex; */
   /* justify-content: center;
   align-items: center; */
   /* height: 100vh; */
+}
+
+h1{
+  font-size: medium ;
+  text-align: center;
+}
+
+h2{
+  font-size: small ;
+  text-align: center;
+}
+
+h3{
+  font-size: smaller ;
+  
 }
 
 .chore-container {
@@ -25,13 +40,13 @@ body {
 }
 
 .chore-item {
-  width: 200px;
+  width: 225px !important;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
   margin: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color:#fff ;
   text-align: center;
 }
 
@@ -100,8 +115,11 @@ tr {
   align-items: center;
   gap: 4px;
   font-size: small;
+  }
 
-}
+/* .assign_form{
+  border:none !important;
+} */
 
 form.group {
   margin: auto;
@@ -123,8 +141,8 @@ input[type="text"] {
 }
 
 input[type="number"] {
-  width: 20%;
-  height: 15px;
+  width: 25% !important;
+  height: 25px!important;
   /* margin-bottom: 10px;  */
 
 }
@@ -135,4 +153,6 @@ input[type="number"] {
 margin: 20px;
   
 }
+
+
 

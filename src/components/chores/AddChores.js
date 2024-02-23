@@ -2,12 +2,15 @@
 import React, { useState } from 'react';
 import '../../styles/ChoreStyles.css';
 import { useNavigate } from 'react-router-dom';
-
+import { request,getAuthToken,getUserIdFromAuthToken } from '../../axios_helper'; 
+//import getUserIdFromAuthToken from '../../axios_helper';
+import Navbar from '../Navbar';
 
 // Functional component for adding a new chore
 const AddChore = () => {
   // Hook to manage navigation between pages
   const navigate = useNavigate();
+  const id = getUserIdFromAuthToken(getAuthToken());
 
   // State to hold chore details
   const [chore, setChore] = useState({
@@ -33,35 +36,36 @@ const AddChore = () => {
     { value: 'clean_vanity.jpg', label: 'clean vanity Image' },
   ];
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Send a POST request to the server to add the new chore
-    const response = await fetch(`http://localhost:8080/api/chores/add`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...chore, image: chore.imagePath }),
-    });
-
-    // Check if the request was successful
-    if (response.ok) {
-      console.log('Chore added successfully');
-      // Clear the form fields after successful addition
-      setChore({
-        name: '',
-        description: '',
-        selectedImage: '',
-        imagePath: '',
-      });
-      // Navigate to the list of chores page
-      navigate('/api/chores/list');
-    } else {
-      console.error('Failed to add chore');
+    if (!chore.name) {
+      alert('Please enter a name for the chore.');
+      return;
     }
+
+    
+      const response = await request('POST', `api/chores/add?id=${id}`, {
+        ...chore,
+        image: chore.imagePath,
+      });
+      
+
+      if (response.status === 200) {
+        console.log('Chore added successfully');
+        setChore({
+          name: '',
+          description: '',
+          selectedImage: '',
+          imagePath: '',
+        });
+        navigate('/api/chores/list'); // Redirect to the list of chores page
+      } else {
+        console.error('Failed to add chore');
+      }
+    
   };
+
 
   // Function to handle image selection
   function handleImageChange(event) {
@@ -78,7 +82,9 @@ const AddChore = () => {
 
   // add chores form page
   return (
-    <div>
+    <div >
+       <Navbar />
+                
       <h1>Create a new Chore</h1>
 
       <form class='group' onSubmit={handleSubmit}>
@@ -135,6 +141,7 @@ const AddChore = () => {
         </div>
       </form>
     </div>
+    
   );
 };
 

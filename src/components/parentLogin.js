@@ -17,7 +17,9 @@ const ParentLogin = () => {
         try {
             const response = await request("POST", "/api/parentLogin", formData);
             setAuthToken(response.data.token);
-            navigate('api/parent-dashboard')
+
+            navigate('/api/parentDash')
+
         } catch (error) {
             console.error("Login failed:", error);
         }

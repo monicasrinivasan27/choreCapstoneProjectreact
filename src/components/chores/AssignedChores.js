@@ -1,127 +1,171 @@
+
 import React, { useState, useEffect } from 'react';
-import '../../styles/ChoreStyles.css';
+import '../../styles/AssignedChoresStyles.css';
+import { request, getAuthToken,getUserIdFromAuthToken} from '../../axios_helper';
+//import getUserIdFromAuthToken from '../../axios_helper';
 
-// Function component for the Assigned Chores page
+import Navbar from '../Navbar';
+
 const AssignedChoresPage = () => {
-  // State to store assigned chores data
   const [assignedChores, setAssignedChores] = useState([]);
+  const [activeTab, setActiveTab] = useState('assigned'); // Default tab
 
-  // Function to fetch assigned chores from the server
+  const id = getUserIdFromAuthToken(getAuthToken());
+
   const fetchAssignedChores = async () => {
-    try {
-      // Fetch assigned chores from the server API
-      const response = await fetch('http://localhost:8080/api/assignments/assigned-chores');
+    
+      const response = await request('get', `api/assignments/assigned-chores/${id}`);
 
-      if (response.ok) {
-        // If the response is successful, set the fetched data to the state
-        const data = await response.json();
+      if (response.status === 200) {
+        const data = response.data;
+        console.log(data);
         setAssignedChores(data);
       } else {
-        // Handle error if fetching fails
         console.error('Failed to fetch assigned chores');
-      }
-    } catch (error) {
-      // Handle errors during the fetch operation
-      console.error('Failed to fetch assigned chores', error);
-    }
-  };
-
-  // Use effect to fetch assigned chores when the component mounts
-  useEffect(() => {
-    fetchAssignedChores();
-  }, []);
-
-  // Function to handle deleting a chore
-  const handleDeleteChore = async (choreId) => {
-    // Send a request to the server to delete the assigned chore
-      const response = await fetch(`http://localhost:8080/api/assignments/assigned-chores/${choreId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        // If deletion is successful, update the UI by refetching assigned chores
-        fetchAssignedChores();
-        console.log('Assigned chore deleted successfully');
-      } else {
-        // Handle error if deletion fails
-        console.error('Failed to delete assigned chore');
       }
     
   };
 
-  
+  useEffect(() => {
+    fetchAssignedChores();
+  }, []);
+
+  const handleDeleteChore = async (choreId) => {
+    
+      const response = await request('delete', `api/assignments/assigned-chores/${choreId}`);
+
+      if (response.status === 200) {
+        fetchAssignedChores();
+        console.log('Assigned chore deleted successfully');
+      } else {
+        console.error('Failed to delete assigned chore');
+      }
+    };
+
+  // Function to handle approving a chore
+  const handleApproveChore = async (choreId) => {
+    const id = getUserIdFromAuthToken(getAuthToken());
+    const response = await request('post', `api/status/approve/${choreId}/${id}`);
+    if (response.status === 200) {
+      console.log('Chore approved successfully');
+
+      // Update the state with the approved chore status
+      setAssignedChores((prevAssignedChores) => {
+        const updatedChores = prevAssignedChores.map((item) => ({
+          ...item,
+          chores: item.chores.map((chore) =>
+            chore.choreId === choreId ? { ...chore, status: 'APPROVED' } : chore
+          ),
+        }));
+        return updatedChores;
+      });
+    } else {
+      console.error('Failed to approve chore'); 
+    }
+  };
+
   return (
     <div>
-      <h1>Assigned Chores</h1>
+      <Navbar />
+      
+      <div className='btn-chores-container'>
+        <button className='btn btn-primary' onClick={() => setActiveTab('assigned')}>Assigned Chores</button>
+        <button className='btn btn-primary' onClick={() => setActiveTab('waiting')}>Waiting for Approval</button>
+        <button className='btn btn-primary' onClick={() => setActiveTab('approved')}>Approved Chores</button>
+      </div>
+
       {Array.isArray(assignedChores) &&
         assignedChores.map((item) => (
           <div key={item.kid.kidId}>
-            <h2>{item.kid.name}'s Chores</h2>
+            <h2>{item.kid.name}'s {activeTab === 'assigned' && 'Assigned Chores'}
+              {activeTab === 'waiting' && 'Waiting for Approval Chores'}
+              {activeTab === 'approved' && 'Approved Chores'}</h2>
             <div className="flex-container">
-              <div className="flex-section">
-                <h3>Assigned Chores</h3>
-                {item.chores
-                  .filter((chore) => chore.status === 'ASSIGNED')
-                  .map((chore) => (
-                    <div key={chore.choreId} className="chore-item">
-                      <div>
-                        <h4>{chore.name}</h4>
-                        <p>{chore.description}</p>
-                        <p>
-                          <strong>Due Date:</strong> {chore.dueDate}
-                        </p>
-                        <p>
-                          <strong>Value Type:</strong> {chore.valueType}
-                        </p>
-                        <p>
-                          <strong>Value:</strong> {chore.value}
-                        </p>
-                        <p>
-                          <strong>Status:</strong> {chore.status}
-                        </p>
-                        {/* Button to delete the chore */}
-                        <button className='button' onClick={() => handleDeleteChore(chore.choreId)}>Delete</button>
+              {/* Render content based on the active tab */}
+              {activeTab === 'assigned' && (
+                <div className="flex-section">
+                  {item.chores
+                    .filter((chore) => chore.status === 'ASSIGNED')
+                    .map((chore) => (
+                      <div key={chore.choreId} className="card-item">
+                        <div>
+                          <h4>{chore.name}</h4>
+                          <p>{chore.description}</p>
+                          <p>
+                            <strong>Due Date:</strong> {chore.dueDate ? chore.dueDate.join('/') : ''}
+                          </p>
+                          <p>
+                            <strong>Value Type:</strong> {chore.valueType}
+                          </p>
+                          <p>
+                            <strong>Value:</strong> {chore.value}
+                          </p>
+                          <p>
+                            <strong>Status:</strong> {chore.status}
+                          </p>
+                          <button className='button' onClick={() => handleDeleteChore(chore.choreId)}>Delete</button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-              </div>
-              <div className="flex-section">
-                <h3>Waiting for Approval</h3>
-                {item.chores
-                  .filter((chore) => chore.status === 'COMPLETED')
-                  .map((chore) => (
-                    <div key={chore.choreId} className="chore-item">
-                      <div>
-                        <h4>{chore.name}</h4>
-                        <p>{chore.description}</p>
-                        <p>
-                          <strong>Due Date:</strong> {chore.dueDate}
-                        </p>
-                        <p>
-                          <strong>Value Type:</strong> {chore.valueType}
-                        </p>
-                        <p>
-                          <strong>Value:</strong> {chore.value}
-                        </p>
-                        <p>
-                          <strong>Status:</strong> {chore.status}
-                        </p>
-                        {/* Button to approve the chore */}
-                        {chore.status === 'COMPLETED' && (
-                          <button onClick={() => handleApproveChore(chore.choreId)}>Approve</button>
-                        )}
+
+                    ))}
+                </div>
+              )}
+
+              {activeTab === 'waiting' && (
+                <div className="flex-section">
+                  {item.chores
+                    .filter((chore) => chore.status === 'COMPLETED')
+                    .map((chore) => (
+                      <div key={chore.choreId} className="card-item">
+                        <div>
+                          <h4>{chore.name}</h4>
+                          <p>{chore.description}</p>
+                          <p>
+                            <strong>Value Type:</strong> {chore.valueType}
+                          </p>
+                          <p>
+                            <strong>Value:</strong> {chore.value}
+                          </p>
+                          <p>
+                            <strong>Status:</strong> {chore.status}
+                          </p>
+                          {chore.status === 'COMPLETED' && (
+                            <button type="submit" onClick={() => handleApproveChore(chore.choreId)}>Approve</button>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-              </div>
+                    ))}
+                </div>
+              )}
+
+              {activeTab === 'approved' && (
+                <div className="flex-section">
+                  {item.chores
+                    .filter((chore) => chore.status === 'APPROVED')
+                    .map((chore) => (
+                      <div key={chore.choreId} className="card-item">
+                        <div>
+                          <h4>{chore.name}</h4>
+                          <p>{chore.description}</p>
+                          <p>
+                            <strong>Value Type:</strong> {chore.valueType}
+                          </p>
+                          <p>
+                            <strong>Value:</strong> {chore.value}
+                          </p>
+                          <p>
+                            <strong>Status:</strong> {chore.status}
+                          </p>
+                        </div>
+
+                      </div>
+                    ))}
+                </div>
+              )}
             </div>
           </div>
         ))}
     </div>
   );
 };
-
 export default AssignedChoresPage;

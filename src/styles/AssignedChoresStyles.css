@@ -1,0 +1,50 @@
+
+h1 {
+  font-size: large;
+  text-align: center;
+}
+
+h2 {
+  font-size: medium;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px;
+}
+
+.flex-section {
+  display: inline-flex;
+  
+  
+}
+
+.card-item {
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+}
+
+.btn-chores-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.btn-primary{
+  background-color: #3D5656 !important;
+  border: #fff !important;
+  color: white ;
+  padding: 5px 10px;
+  margin: 4px;
+  border-radius: 10px;
+  font-size: 12px;
+}
