@@ -106,6 +106,7 @@ const AssignedChoresPage = () => {
                           <button className='button' onClick={() => handleDeleteChore(chore.choreId)}>Delete</button>
                         </div>
                       </div>
+
                     ))}
                 </div>
               )}
@@ -156,6 +157,7 @@ const AssignedChoresPage = () => {
                             <strong>Status:</strong> {chore.status}
                           </p>
                         </div>
+
                       </div>
                     ))}
                 </div>
