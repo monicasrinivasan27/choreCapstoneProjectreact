@@ -1,6 +1,7 @@
 import * as React from 'react';
 import '../styles/Navbar.css'
 import { Link } from 'react-router-dom';
+import Logout from './Logout';
 
 export default function Header(props) {
     return (
@@ -30,7 +31,8 @@ export default function Header(props) {
                             </li>
                             
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Logout</a>
+                            {/* <span className="nav-link active" aria-current="page" onClick={handleLogout} >Logout</span> */}
+                            <Logout/>
                             </li>
                         </ul>
                     </div>

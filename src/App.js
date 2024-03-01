@@ -14,6 +14,8 @@ import AddReward from './components/rewards/AddReward';
 import EditReward from './components/rewards/EditReward';
 import ApiCall from './components/api/ApiCall';
 import ParentStatistics from './components/ParentStatistics';
+import Logout from './components/Logout';
+import LogoutSuccess from './components/LogoutSuccess'
 
 
 function App() {
@@ -24,6 +26,9 @@ function App() {
      
       <Route path='/api/parentLogin' element={<ParentLogin />} />
       <Route path='/api/parentDash' element={<ParentDashboard />} />
+      <Route path='/api/logout' element={<Logout />} />
+      <Route path='/api/logout-success' element={<LogoutSuccess />} />
+
       <Route path='/api/parent-dashboard/statistics' element={<ParentStatistics />} />
       <Route path="/api/chores/add" element={<AddChores />} />
       <Route path="/api/chores/list" element={<ChoresList />} />

@@ -15,41 +15,48 @@ const Register = () => {
         verifyPassword: "",
     });
 
-    useEffect(() => {
-
-        setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            username: "",
-            password: "",
-            verifyPassword: "",
-        });
-    },[])
-
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value}));
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
     const onRegister = (e) => {
         e.preventDefault();
-        request("POST", "/api/register", formData)
-        .then((response) => {
-            setAuthToken(response.data.token);
-            setFormData({
-                firstName: "",
-                lastName: "",
-                email: "",
-                username: "",
-                password: "",
-                verifyPassword: "",
-            });
-            navigate('/api/parentLogin');
-        })
-        .catch((error) => {
-            console.error("Registration failed:", error);
-        });
+
+        // Basic input validation
+        if (!formData.firstName || !formData.lastName || !formData.email || !formData.username || !formData.password || !formData.verifyPassword) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        if (formData.password !== formData.verifyPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
+        request("POST", "/api/checkUnique", { username: formData.username, email: formData.email })
+            .then((response) => {
+                if (response.data.usernameExists) {
+                    alert("Username is already taken. Please choose another.");
+                } else if (response.data.emailExists) {
+                    alert("Email is already registered. Please use a different email address.");
+                } else {
+                    
+                    request("POST", "/api/register", formData)
+                        .then((response) => {
+                            setAuthToken(response.data.token);
+                            setFormData({
+                                firstName: "",
+                                lastName: "",
+                                email: "",
+                                username: "",
+                                password: "",
+                                verifyPassword: "",
+                            });
+                            navigate('/api/parentLogin');
+                        })
+                }
+            })
     };
 
     return (

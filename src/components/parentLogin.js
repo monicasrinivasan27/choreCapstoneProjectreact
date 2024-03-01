@@ -9,19 +9,26 @@ const ParentLogin = () => {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
-    })
+    });
 
     const onSubmitParentLogin = async (e) => {
         e.preventDefault();
 
+        // Basic input validation
+        if (!formData.username || !formData.password) {
+            alert("Please enter both username and password.");
+            return;
+        }
+
         try {
             const response = await request("POST", "/api/parentLogin", formData);
             setAuthToken(response.data.token);
-            navigate('/api/parentDash')
+            navigate('/api/parentDash');
         } catch (error) {
             console.error("Login failed:", error);
+            alert("Invalid username or password. Please try again.");
         }
-    }
+    };
 
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -54,15 +61,12 @@ const ParentLogin = () => {
                         <label className='form-label' htmlFor='password'>Password</label>
                     </div>
                     <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
-                        <Link to='/api/parentDash'>
-                            {/* <button className='btn btn-primary register-btn' type='submit'>Sign In</button> */}
-                            <a class="btn btn-primary register-btn" href="ParentLogin" type="submit" role="submit" >Sign In</a>
-                        </Link>
+                        <button className='btn btn-primary register-btn' type='submit'>Sign In</button>
                     </div>
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default ParentLogin;
