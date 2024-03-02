@@ -61,9 +61,9 @@ const KidLogin = () => {
                         <label className='form-label' htmlFor='password'>Password</label>
                     </div>
                     <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
-                        <Link to='/api/kid-dashboard'>
+                        {/* <Link to='/api/kid-dashboard'> */}
                             <button className='btn btn-primary register-btn' type='submit'>Sign In</button>
-                        </Link>
+                        {/* </Link> */}
                     </div>
                 </form>
             </div>
