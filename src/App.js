@@ -16,6 +16,10 @@ import ApiCall from './components/api/ApiCall';
 import ParentStatistics from './components/ParentStatistics';
 import Logout from './components/Logout';
 import LogoutSuccess from './components/LogoutSuccess'
+import KidRegister from './components/KidRegister';
+import KidLogin from './components/KidLogin';
+import KidDashboard from './components/KidDashboard';
+import Contact from './components/Contact';
 
 
 function App() {
@@ -23,9 +27,13 @@ function App() {
     <Routes>
       <Route path='/' element={<LandingPage />} />
       <Route path='/api/register' element={<Register />} />
+      <Route path='/api/kidRegister' element={<KidRegister />} />
+      <Route path='/api/kidLogin' element={<KidLogin />} />
+      <Route path='/api/kid-dashboard' element={<KidDashboard />} />
+      <Route path='/api/contact' element={<Contact />} />
      
       <Route path='/api/parentLogin' element={<ParentLogin />} />
-      <Route path='/api/parentDash' element={<ParentDashboard />} />
+      <Route path='/api/parent-dashboard' element={<ParentDashboard />} />
       <Route path='/api/logout' element={<Logout />} />
       <Route path='/api/logout-success' element={<LogoutSuccess />} />
 

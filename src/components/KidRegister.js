@@ -14,16 +14,6 @@ const KidRegister= () => {
         verifyPassword: "",
     })
 
-    useEffect(() => {
-
-        setFormData({
-            name: "",
-            username: "",
-            password: "",
-            verifyPassword: "",
-        })
-    },[])
-
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({ ...prevData, [name]: value}));
@@ -31,20 +21,36 @@ const KidRegister= () => {
 
     const onKidRegister = (e) => {
         e.preventDefault();
-        request("POST", "/api/kidRegister", formData)
-        .then((response) => {
-            setAuthToken(response.data.token);
-            setFormData({
-                name: "",
-                username: "",
-                password: "",
-                verifyPassword: "",
-            });
-            navigate('/api/parent-dashboard')
-        })
-        .catch((error) => {
-            console.error("Registration failed:", error);
-        });
+
+        // Basic input validation
+        if (!formData.name || !formData.username || !formData.password || !formData.verifyPassword) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        if (formData.password !== formData.verifyPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
+        request("POST", "/api/checkKidUnique", { username: formData.username })
+            .then((response) => {
+                if (response.data.usernameExists) {
+                    alert("Username is already taken. Please choose another.");
+                } else {
+                    request("POST", "/api/kidRegister", formData)
+                        .then((response) => {
+                            // setAuthToken(response.data.token);
+                            setFormData({
+                                firstName: "",
+                                username: "",
+                                password: "",
+                                verifyPassword: "",
+                            });
+                            navigate('/api/parent-dashboard');
+                        })
+                }
+            })
     };
 
     return(
@@ -84,7 +90,7 @@ const KidRegister= () => {
                         <label className='form-label' htmlFor='verifyPassword'>Verify Password</label>
                     </div>
                     <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
-                        <button type='submit' className='btn btn-primary register-btn'>Create Account</button>
+                        <button type='submit button' className='btn btn-primary register-btn'>Create Account</button>
                     </div>
                 </form>
             </div>

@@ -60,6 +60,16 @@ export const deleteAuthToken = () => {
     window.localStorage.removeItem("auth_token");
 };
 
+export const requestAnon = async (method, url, data) => {
+
+
+    return axios({
+        method: method,
+        url: url,
+        data: data,
+        credentials: 'include'  // Include this line if dealing with cross-origin requests and you want to send credentials.
+    });
+};
 
 
 //export default getUserIdFromAuthToken;
