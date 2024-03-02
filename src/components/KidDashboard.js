@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
+import KidNavbar from './KidNavbar';
 
 const KidDashboard = () => {
 
     
         return (
             <div className='body'>
-                <Navbar />
+                <KidNavbar />
                 <div className='jumbotron jumbotron'>
                     <div className='container'>
                         <h1 className='display-4'>Welcome</h1>

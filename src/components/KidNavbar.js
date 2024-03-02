@@ -20,20 +20,17 @@ export default function Navbar() {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/api/parent-dashboard">Home</a>
+                                <a class="nav-link active" aria-current="page" href="/api/kid-dashboard">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/api/kidRegister">Add Child</a>
+                                <a class="nav-link active" aria-current="page" href="#">View Rewards</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/api/chores/add">Create Chore</a>
+                                <a class="nav-link active" aria-current="page" href="#">Past Chores</a>
 
                           </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/api/chores/list">Chores List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/api/assignments/assigned-chores/:id">Assigned Chores</a>
+                                <a class="nav-link active" aria-current="page" href="#">Stats</a>
                             </li>
                             
                             <li class="nav-item">
