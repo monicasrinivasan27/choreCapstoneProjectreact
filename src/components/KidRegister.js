@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { request, setAuthToken } from '../axios_helper';
+import { request, getAuthToken ,getUserIdFromAuthToken} from '../axios_helper';
 import bootstrap from 'bootstrap';
 import'../styles/Register.css';
+
 
 const KidRegister= () => {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ const KidRegister= () => {
         username: "",
         password: "",
         verifyPassword: "",
+        
     })
 
     const onChangeHandler = (event) => {
@@ -21,6 +23,7 @@ const KidRegister= () => {
 
     const onKidRegister = (e) => {
         e.preventDefault();
+        const id = getUserIdFromAuthToken(getAuthToken());
 
         // Basic input validation
         if (!formData.name || !formData.username || !formData.password || !formData.verifyPassword) {
@@ -33,12 +36,20 @@ const KidRegister= () => {
             return;
         }
 
+        const requestData = {
+            ...formData,
+            
+                id: id, 
+            
+        };
+    
+
         request("POST", "/api/checkKidUnique", { username: formData.username })
             .then((response) => {
                 if (response.data.usernameExists) {
                     alert("Username is already taken. Please choose another.");
                 } else {
-                    request("POST", "/api/kidRegister", formData)
+                    request("POST", `/api/kidRegister?id=${id}`, requestData)
                         .then((response) => {
                             // setAuthToken(response.data.token);
                             setFormData({
@@ -46,6 +57,7 @@ const KidRegister= () => {
                                 username: "",
                                 password: "",
                                 verifyPassword: "",
+                                
                             });
                             navigate('/api/parent-dashboard');
                         })
