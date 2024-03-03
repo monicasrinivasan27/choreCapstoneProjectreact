@@ -14,14 +14,21 @@ const KidLogin = () => {
     const onSubmitKidLogin = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await request("POST", "/api/kidLogin", formData);
-            setAuthToken(response.data.token);
-            navigate('api/kid-dashboard')
-        } catch (error) {
-            console.error("Login failed:", error);
-        }
+      // Basic input validation
+      if (!formData.username || !formData.password) {
+        alert("Please enter both username and password.");
+        return;
     }
+
+    try {
+        const response = await request("POST", "/api/kidLogin", formData);
+        setAuthToken(response.data.token);
+        navigate('/api/kid-dashboard');
+    } catch (error) {
+        console.error("Login failed:", error);
+        alert("Invalid username or password. Please try again.");
+    }
+};
 
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -54,9 +61,9 @@ const KidLogin = () => {
                         <label className='form-label' htmlFor='password'>Password</label>
                     </div>
                     <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
-                        <Link to='/api/kid-dashboard'>
+                        {/* <Link to='/api/kid-dashboard'> */}
                             <button className='btn btn-primary register-btn' type='submit'>Sign In</button>
-                        </Link>
+                        {/* </Link> */}
                     </div>
                 </form>
             </div>

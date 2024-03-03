@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/ChoreStyles.css';
 import { useNavigate,Link } from 'react-router-dom';
-import AssignChore from './AssignChore';
+import AssignChore from './ChoreAssignmentProcess';
 import { request,getAuthToken,getUserIdFromAuthToken} from '../../axios_helper'; 
 //import getUserIdFromAuthToken from '../../axios_helper';
 

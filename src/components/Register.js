@@ -16,41 +16,48 @@ const Register = () => {
         verifyPassword: "",
     });
 
-    useEffect(() => {
-
-        setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            username: "",
-            password: "",
-            verifyPassword: "",
-        });
-    },[])
-
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value}));
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
     const onRegister = (e) => {
         e.preventDefault();
-        request("POST", "/api/register", formData)
-        .then((response) => {
-            setAuthToken(response.data.token);
-            setFormData({
-                firstName: "",
-                lastName: "",
-                email: "",
-                username: "",
-                password: "",
-                verifyPassword: "",
-            });
-            navigate('/api/parentLogin');
-        })
-        .catch((error) => {
-            console.error("Registration failed:", error);
-        });
+
+        // Basic input validation
+        if (!formData.firstName || !formData.lastName || !formData.email || !formData.username || !formData.password || !formData.verifyPassword) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        if (formData.password !== formData.verifyPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
+        request("POST", "/api/checkUnique", { username: formData.username, email: formData.email })
+            .then((response) => {
+                if (response.data.usernameExists) {
+                    alert("Username is already taken. Please choose another.");
+                } else if (response.data.emailExists) {
+                    alert("Email is already registered. Please use a different email address.");
+                } else {
+                    
+                    request("POST", "/api/register", formData)
+                        .then((response) => {
+                            setAuthToken(response.data.token);
+                            setFormData({
+                                firstName: "",
+                                lastName: "",
+                                email: "",
+                                username: "",
+                                password: "",
+                                verifyPassword: "",
+                            });
+                            navigate('/api/parentLogin');
+                        })
+                }
+            })
     };
 
     return (
@@ -100,9 +107,8 @@ const Register = () => {
                         <label className='form-label' htmlFor='verifyPassword'>Verify Password</label>
                     </div>
                     <div className='row justify-content-center d-grid gap-2 col-6 mx-auto'>
-                        <button className='btn btn-primary register-btn' type='submit'>Create Account</button>
-                        {/* <a class="btn btn-primary register-btn" href="ParentLogin" type="submit" role="submit" >Create Account</a> */}
-                    </div>
+                        <button className='btn btn-primary register-btn' type='submit button'>Create Account</button>
+                        </div>
                 </form>
             </div>
         </div>
