@@ -32,11 +32,12 @@ This repository contains the frontend code for Task Crusher,a comprehensive chor
 * Efficient management of group chores, allowing parents to assign and rotate chores among children seamlessly.
 ### Holiday Alert box with Nager API Integration:
 * Display alert and dynamically adjust rewards based on holidays with seamless integration of the Nager Date API.
+
 ## Tech Stack:
 ### React:
-Development of a dynamic and efficient user interface.
-Integration of React icons for a modern UI.
-Bootstrap integration for enhanced navigation and forms.
+* Development of a dynamic and efficient user interface.
+* Integration of React icons for a modern UI.
+* Bootstrap integration for enhanced navigation and forms.
 
 ## Group Members:
 * Katy Tapley
