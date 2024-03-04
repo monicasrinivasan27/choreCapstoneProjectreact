@@ -23,7 +23,7 @@ This repository contains the frontend code for Task Crusher,a comprehensive chor
 * Streamlined navigation and clear organization for a seamless experience.
 ### Rewards and Claim Functionality:
 * UI components for rewards and points management, providing a clear view of earned rewards.
-* Streamlined process for claiming rewards, ensuring a hassle-free experience.
+* Streamlined process for claiming rewards.
 ### Comment Box for Chores:
 * Incorporated a user-friendly comment box for parents to provide feedback.
 ### Contact Us Modal:
