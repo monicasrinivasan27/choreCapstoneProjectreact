@@ -26,6 +26,9 @@ export default function Navbar() {
                                 <a class="nav-link active" aria-current="page" href="/api/kidRegister">Add Child</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/allRewards">Add Rewards</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/api/chores/add">Create Chore</a>
 
                           </li>

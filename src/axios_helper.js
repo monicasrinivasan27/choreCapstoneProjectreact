@@ -70,6 +70,24 @@ export const requestAnon = async (method, url, data) => {
         credentials: 'include'  // Include this line if dealing with cross-origin requests and you want to send credentials.
     });
 };
+    export const getChildUserNameFromAuthToken = () => {
+        const authToken = getAuthToken();
+        
+        if (!authToken) {
+            console.error('No auth token found.');
+            return null;
+        }
+    
+        try {
+            const decodedToken = jwtDecode(authToken);
+            const userName = decodedToken.sub;
+            return userName;
+        } catch (error) {
+            console.error('Error decoding token:', error);
+            return null;
+        }
+    
+};
 
 
 //export default getUserIdFromAuthToken;
