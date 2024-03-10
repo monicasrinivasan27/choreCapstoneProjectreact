@@ -30,6 +30,7 @@ const fetchData = async () => {
   console.log("response in reward management : ",response);
     console.log("got kid data : ",response.data)
     console.log("got dollars : ",response.data.kid.dollars)
+    
   setKidId(response.data.kid.kidId);
   setRewardPoints(response.data.kid.points);
   setDollars(response.data.kid.dollars);
@@ -48,7 +49,7 @@ const fetchData = async () => {
 
   const completeTask = (choreId) => {
     console.log("config L : ",config);
-    axios.put("http://localhost:8080/api/chores/kid-complete/"+kidId+"/"+choreId, null, config).then((response)=>{
+    axios.put("http://localhost:8080/api/chores/kid-complete/"+kidId+"/"+choreId, null, props.userName).then((response)=>{
       fetchData();
     }).catch((error)=>{
     });

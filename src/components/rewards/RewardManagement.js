@@ -60,7 +60,7 @@ const RewardManagement = (props) => {
   }
 
   const claimReward = (rewardPoints)=>{
-  axios.put('http://localhost:8080/api/rewards/claim/'+rewardPoints+'/'+props.kidId,null,config)
+  axios.put('http://localhost:8080/api/rewards/claim/'+rewardPoints+'/'+props.kidId,null,props.userName)
 .then(function (response) {
   setRewardPoints(response.data.points)
   alert("Claimed reward successfully");

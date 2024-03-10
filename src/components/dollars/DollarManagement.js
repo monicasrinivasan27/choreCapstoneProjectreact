@@ -32,7 +32,7 @@ const goBackToTasks = ()=>{
     }
     else{
 
-    axios.put('http://localhost:8080/api/dollars/claim/'+claimDollars+'/'+props.kidId,null,config)
+    axios.put('http://localhost:8080/api/dollars/claim/'+claimDollars+'/'+props.kidId,null,props.userName)
 .then(function (response) {
   setAvailableDollars(response.data.dollars)
   alert("Claimed dollars successfully");
