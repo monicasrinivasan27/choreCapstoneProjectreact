@@ -5,7 +5,7 @@ This repository contains the frontend code for Task Crusher,a comprehensive chor
 
 ## Key Features:
 
-### Bootstrap-Enhanced Navbar:
+## Bootstrap-Enhanced Navbar:
 * Streamlined navigation with a Bootstrap-integrated navbar for a responsive UI.
 ### Login and Register Forms:
 * Engage with visually appealing and user-friendly login and registration forms.
