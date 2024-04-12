@@ -3,8 +3,8 @@ Welcome to the Task Crusher Frontend Repository!
 
 This repository contains the frontend code for Task Crusher,a comprehensive chore management application. The frontend is built using ReactJS. Below is an extensive overview of the project features.
 
-## Key Features:
-- [Installation](##installation)
+[Key Features](## Key Features):
+
 ## Bootstrap-Enhanced Navbar:
 * Streamlined navigation with a Bootstrap-integrated navbar for a responsive UI.
 ### Login and Register Forms:
